@@ -5,29 +5,29 @@ var _y1 = argument1;
 var _x2 = argument2;
 var _y2 = argument3;
 
-var _px1 = argument4;
-var _py1 = argument5;
-var _px2 = argument6;
-var _py2 = argument7;
-var _px3 = argument8;
-var _py3 = argument9;
+var _tx1 = argument4;
+var _ty1 = argument5;
+var _tx2 = argument6;
+var _ty2 = argument7;
+var _tx3 = argument8;
+var _ty3 = argument9;
 
-if ( _x1 == _px1 ) and ( _y1 == _py1 ) {
-    if ( _x2 == _px2 ) and ( _y2 == _py2 ) {
+if ( _x1 == _tx1 ) and ( _y1 == _ty1 ) {
+    if ( _x2 == _tx2 ) and ( _y2 == _ty2 ) {
         return true;
-    } else if ( _x2 == _px3 ) and ( _y2 == _py3 ) {
-        return true;
-    }
-} else if ( _x1 == _px2 ) and ( _y1 == _py2 ) {
-    if ( _x2 == _px1 ) and ( _y2 == _py1 ) {
-        return true;
-    } else if ( _x2 == _px3 ) and ( _y2 == _py3 ) {
+    } else if ( _x2 == _tx3 ) and ( _y2 == _ty3 ) {
         return true;
     }
-} else if ( _x1 == _px3 ) and ( _y1 == _py3 ) {
-    if ( _x2 == _px1 ) and ( _y2 == _py1 ) {
+} else if ( _x1 == _tx2 ) and ( _y1 == _ty2 ) {
+    if ( _x2 == _tx1 ) and ( _y2 == _ty1 ) {
         return true;
-    } else if ( _x2 == _px3 ) and ( _y2 == _py3 ) {
+    } else if ( _x2 == _tx3 ) and ( _y2 == _ty3 ) {
+        return true;
+    }
+} else if ( _x1 == _tx3 ) and ( _y1 == _ty3 ) {
+    if ( _x2 == _tx1 ) and ( _y2 == _ty1 ) {
+        return true;
+    } else if ( _x2 == _tx2 ) and ( _y2 == _ty2 ) {
         return true;
     }
 }

@@ -51,7 +51,15 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="obj_delaunay" x="32" y="32" name="inst_EE531FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_delaunay" x="0" y="0" name="inst_EE531FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="384" y="672" name="inst_F6430547" locked="0" code="" scaleX="4" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="32" y="32" name="inst_4B97511B" locked="0" code="" scaleX="14.5" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="64" y="160" name="inst_8BC58E42" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="640" y="704" name="inst_8CAF08FC" locked="0" code="" scaleX="5" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="320" y="352" name="inst_506FA92D" locked="0" code="" scaleX="8" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="448" y="160" name="inst_8047C1E1" locked="0" code="" scaleX="1" scaleY="3" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="128" y="288" name="inst_7840B0D6" locked="0" code="" scaleX="1" scaleY="5.5" colour="4294967295" rotation="0"/>
+    <instance objName="obj_shape" x="480" y="608" name="inst_E7AD0C4B" locked="0" code="" scaleX="5" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
