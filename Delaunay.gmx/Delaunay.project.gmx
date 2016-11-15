@@ -11,12 +11,14 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\__enums.gml</script>
+    <script>scripts\cout.gml</script>
+    <script>scripts\scr_delaunay_bowyer_watson.gml</script>
+    <script>scripts\scr_convex_polys_from_triangles.gml</script>
     <script>scripts\scr_line_on_triangle.gml</script>
     <script>scripts\scr_triangle_circumcircle_x.gml</script>
     <script>scripts\scr_triangle_circumcircle_y.gml</script>
     <script>scripts\scr_array_delete.gml</script>
-    <script>scripts\cout.gml</script>
-    <script>scripts\__enums.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_cambria24</font>
@@ -24,7 +26,6 @@
   <objects name="objects">
     <object>objects\obj_shape</object>
     <object>objects\obj_delaunay</object>
-    <object>objects\obj_delaunay_old</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
