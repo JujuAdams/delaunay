@@ -1,10 +1,11 @@
-///scr_delaunay_bowyer_watson( points, left, top, right, bottom )
+///scr_delaunay_bowyer_watson( points, left, top, right, bottom, remove border )
 
-var _points = argument0;
-var _left   = argument1;
-var _top    = argument2;
-var _right  = argument3;
-var _bottom = argument4;
+var _points        = argument0;
+var _left          = argument1;
+var _top           = argument2;
+var _right         = argument3;
+var _bottom        = argument4;
+var _remove_border = argument5;
 
 /*
 var _min_x =  999999;
@@ -198,6 +199,31 @@ for( var _p = 0; _p < points_count; _p += e_point.size ) {
         triangles[ e_triangle.r  + triangles_count ] = _r;
         
         triangles_count += e_triangle.size;
+        
+    }
+    
+}
+
+if ( _remove_border ) {
+    
+    //Remove triangles that link to the starting triangle
+    for( var _t = triangles_count - e_triangle.size; _t >= 0; _t -= e_triangle.size ) {
+        
+        var _x1 = triangles[ e_triangle.x1 + _t ];
+        var _y1 = triangles[ e_triangle.y1 + _t ];
+        var _x2 = triangles[ e_triangle.x2 + _t ];
+        var _y2 = triangles[ e_triangle.y2 + _t ];
+        var _x3 = triangles[ e_triangle.x3 + _t ];
+        var _y3 = triangles[ e_triangle.y3 + _t ];
+        
+        if ( _x1 <= _min_x ) or ( _y1 <= _min_y ) or ( _x1 >= _max_x ) or ( _y1 >= _max_y )
+        or ( _x2 <= _min_x ) or ( _y2 <= _min_y ) or ( _x2 >= _max_x ) or ( _y2 >= _max_y )
+        or ( _x3 <= _min_x ) or ( _y3 <= _min_y ) or ( _x3 >= _max_x ) or ( _y3 >= _max_y ) {
+            
+            scr_array_delete( triangles, _t, e_triangle.size, triangles_count );
+            triangles_count -= e_triangle.size;
+            
+        }
         
     }
     

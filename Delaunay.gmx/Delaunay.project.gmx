@@ -7,6 +7,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_point</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -25,6 +26,7 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_shape</object>
+    <object>objects\obj_point</object>
     <object>objects\obj_delaunay</object>
   </objects>
   <rooms name="rooms">

@@ -27,44 +27,17 @@
             <kind>1</kind>
             <string>///Create
 
-view_xview = -512;
-view_yview = -364;
-
 var _n = 0;
 
-/*
-points[ e_point.x + _n ] = 0;
-points[ e_point.y + _n ] = 0;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = room_width/2;
-points[ e_point.y + _n ] = 0;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = room_width;
-points[ e_point.y + _n ] = 0;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = 0;
-points[ e_point.y + _n ] = room_height/2;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = 0;
-points[ e_point.y + _n ] = room_height;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = room_width;
-points[ e_point.y + _n ] = room_height/2;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = room_width/2;
-points[ e_point.y + _n ] = room_height;
-_n += e_point.size;
-
-points[ e_point.x + _n ] = room_width;
-points[ e_point.y + _n ] = room_height;
-_n += e_point.size;
-*/
+var _size = instance_number( obj_point );
+for( var _i = 0; _i &lt; _size; _i++ ) {
+    var _inst = instance_find( obj_point, _i );
+    
+    points[ e_point.x + _n ] = _inst.x;
+    points[ e_point.y + _n ] = _inst.y;
+    _n += e_point.size;
+    
+}
 
 var _size = instance_number( obj_shape );
 for( var _i = 0; _i &lt; _size; _i++ ) {
@@ -116,7 +89,7 @@ function BowyerWatson (pointList)
       return triangulation
 */
 
-scr_delaunay_bowyer_watson( points, 0, 0, room_width, room_height );
+scr_delaunay_bowyer_watson( points, 0, 0, room_width, room_height, true );
 scr_convex_polys_from_triangles( triangles );
 
 /*
@@ -313,7 +286,6 @@ for( var _t = triangles_count - e_triangle.size; _t &gt;= 0; _t -= e_triangle.si
             <kind>1</kind>
             <string>///Draw
 
-/*
 for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
     
     if ( point_in_triangle( mouse_x, mouse_y, 
@@ -336,8 +308,8 @@ for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
     draw_set_alpha( 1 );
     
 }
-*/
 
+/*
 for( var _y = 0; _y &lt; polygons_count; _y += e_polygon.size ) {
     
     var _points       = polygons[ e_polygon.points + _y ];
@@ -355,6 +327,7 @@ for( var _y = 0; _y &lt; polygons_count; _y += e_polygon.size ) {
     draw_set_colour( c_black );
     
 }
+*/
 </string>
           </argument>
         </arguments>
