@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,15 +27,15 @@
             <kind>1</kind>
             <string>///Create
 
-var _n = 0;
+points_count = 0;
 
 var _size = instance_number( obj_point );
 for( var _i = 0; _i &lt; _size; _i++ ) {
     var _inst = instance_find( obj_point, _i );
     
-    points[ e_point.x + _n ] = _inst.x;
-    points[ e_point.y + _n ] = _inst.y;
-    _n += e_point.size;
+    points[ e_point.x + points_count ] = _inst.x;
+    points[ e_point.y + points_count ] = _inst.y;
+    points_count += e_point.size;
     
 }
 
@@ -43,225 +43,42 @@ var _size = instance_number( obj_shape );
 for( var _i = 0; _i &lt; _size; _i++ ) {
     var _inst = instance_find( obj_shape, _i );
     
-    points[ e_point.x + _n ] = _inst.bbox_left;
-    points[ e_point.y + _n ] = _inst.bbox_top;
-    _n += e_point.size;
+    points[ e_point.x + points_count ] = _inst.bbox_left;
+    points[ e_point.y + points_count ] = _inst.bbox_top;
+    points_count += e_point.size;
     
-    points[ e_point.x + _n ] = _inst.bbox_right;
-    points[ e_point.y + _n ] = _inst.bbox_top;
-    _n += e_point.size;
+    points[ e_point.x + points_count ] = _inst.bbox_right;
+    points[ e_point.y + points_count ] = _inst.bbox_top;
+    points_count += e_point.size;
     
-    points[ e_point.x + _n ] = _inst.bbox_left;
-    points[ e_point.y + _n ] = _inst.bbox_bottom;
-    _n += e_point.size;
+    points[ e_point.x + points_count ] = _inst.bbox_left;
+    points[ e_point.y + points_count ] = _inst.bbox_bottom;
+    points_count += e_point.size;
     
-    points[ e_point.x + _n ] = _inst.bbox_right;
-    points[ e_point.y + _n ] = _inst.bbox_bottom;
-    _n += e_point.size;
+    points[ e_point.x + points_count ] = _inst.bbox_right;
+    points[ e_point.y + points_count ] = _inst.bbox_bottom;
+    points_count += e_point.size;
+    
+    points[ e_point.x + points_count ] = mean( _inst.bbox_left, _inst.bbox_right );
+    points[ e_point.y + points_count ] = _inst.bbox_top;
+    points_count += e_point.size;
+    
+    points[ e_point.x + points_count ] = mean( _inst.bbox_left, _inst.bbox_right );
+    points[ e_point.y + points_count ] = _inst.bbox_bottom;
+    points_count += e_point.size;
+    
+    points[ e_point.x + points_count ] = _inst.bbox_left;
+    points[ e_point.y + points_count ] = mean( _inst.bbox_top, _inst.bbox_bottom );
+    points_count += e_point.size;
+    
+    points[ e_point.x + points_count ] = _inst.bbox_right;
+    points[ e_point.y + points_count ] = mean( _inst.bbox_top, _inst.bbox_bottom );
+    points_count += e_point.size;
     
 }
 
-points_count = _n;
-
-/*
-function BowyerWatson (pointList)
-      // pointList is a set of coordinates defining the points to be triangulated
-      triangulation := empty triangle mesh data structure
-      add super-triangle to triangulation // must be large enough to completely contain all the points in pointList
-      for each point in pointList do // add all the points one at a time to the triangulation
-         badTriangles := empty set
-         for each triangle in triangulation do // first find all the triangles that are no longer valid due to the insertion
-            if point is inside circumcircle of triangle
-               add triangle to badTriangles
-         polygon := empty set
-         for each triangle in badTriangles do // find the boundary of the polygonal hole
-            for each edge in triangle do
-               if edge is not shared by any other triangles in badTriangles
-                  add edge to polygon
-         for each triangle in badTriangles do // remove them from the data structure
-            remove triangle from triangulation
-         for each edge in polygon do // re-triangulate the polygonal hole
-            newTri := form a triangle from edge to point
-            add newTri to triangulation
-      for each triangle in triangulation // done inserting points, now clean up
-         if triangle contains a vertex from original super-triangle
-            remove triangle from triangulation
-      return triangulation
-*/
-
-scr_delaunay_bowyer_watson( points, 0, 0, room_width, room_height, true );
+scr_delaunay_bowyer_watson( points,   0, 0, room_width, room_height,   false );
 scr_convex_polys_from_triangles( triangles );
-
-/*
-//Define starting triangle
-triangles_count = 0;
-
-var _stx1 = -100;
-var _sty1 = -100;
-var _stx2 = room_width*2.2;
-var _sty2 = -100;
-var _stx3 = -100;
-var _sty3 = room_height*2.2;
-var _cx   = scr_triangle_circumcircle_x( _stx1, _sty1, _stx2, _sty2, _stx3, _sty3 );
-var _cy   = scr_triangle_circumcircle_y( _stx1, _sty1, _stx2, _sty2, _stx3, _sty3 );
-var _r    = point_distance( _stx1, _sty1, _cx, _cy );
-
-triangles[ e_triangle.x1 + triangles_count ] = _stx1;
-triangles[ e_triangle.y1 + triangles_count ] = _sty1;
-triangles[ e_triangle.x2 + triangles_count ] = _stx2;
-triangles[ e_triangle.y2 + triangles_count ] = _sty2;
-triangles[ e_triangle.x3 + triangles_count ] = _stx3;
-triangles[ e_triangle.y3 + triangles_count ] = _sty3;
-triangles[ e_triangle.cx + triangles_count ] = _cx;
-triangles[ e_triangle.cy + triangles_count ] = _cy;
-triangles[ e_triangle.r  + triangles_count ] = _r;
-
-triangles_count += e_triangle.size;
-
-
-
-//For each point
-for( var _p = 0; _p &lt; points_count; _p += e_point.size ) {
-    
-    var _px = points[ e_point.x + _p ];
-    var _py = points[ e_point.y + _p ];
-    
-    //Find triangles where the point is inside the circumcircle
-    var _bad_triangles = undefined;
-    var _bad_triangles_count = 0;
-    for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
-        
-        if ( point_distance( _px, _py, triangles[ e_triangle.cx + _t ], triangles[ e_triangle.cy + _t ] ) &lt;= triangles[ e_triangle.r + _t ] ) {
-            _bad_triangles[ _bad_triangles_count ] = _t;
-            _bad_triangles_count++;
-        }
-        
-    }
-    
-    //For all bad triangles
-    var _polygon = undefined;
-    var _polygon_count = 0;
-    for( var _a = 0; _a &lt; _bad_triangles_count; _a++ ) {
-        var _bad_tri_a = _bad_triangles[ _a ];
-        
-        var _ax1 = triangles[ e_triangle.x1 + _bad_tri_a ];
-        var _ay1 = triangles[ e_triangle.y1 + _bad_tri_a ];
-        var _ax2 = triangles[ e_triangle.x2 + _bad_tri_a ];
-        var _ay2 = triangles[ e_triangle.y2 + _bad_tri_a ];
-        var _ax3 = triangles[ e_triangle.x3 + _bad_tri_a ];
-        var _ay3 = triangles[ e_triangle.y3 + _bad_tri_a ];
-        
-        var _external1 = true;
-        var _external2 = true;
-        var _external3 = true;
-        
-        for( var _b = 0; _b &lt; _bad_triangles_count; _b++ ) {
-            if ( _a == _b ) continue;
-            
-            var _bad_tri_b = _bad_triangles[ _b ];
-            
-            var _bx1 = triangles[ e_triangle.x1 + _bad_tri_b ];
-            var _by1 = triangles[ e_triangle.y1 + _bad_tri_b ];
-            var _bx2 = triangles[ e_triangle.x2 + _bad_tri_b ];
-            var _by2 = triangles[ e_triangle.y2 + _bad_tri_b ];
-            var _bx3 = triangles[ e_triangle.x3 + _bad_tri_b ];
-            var _by3 = triangles[ e_triangle.y3 + _bad_tri_b ];
-            
-            if ( _external1 ) and ( scr_line_on_triangle( _ax1, _ay1, _ax2, _ay2,   _bx1, _by1, _bx2, _by2, _bx3, _by3 ) ) _external1 = false;
-            if ( _external2 ) and ( scr_line_on_triangle( _ax2, _ay2, _ax3, _ay3,   _bx1, _by1, _bx2, _by2, _bx3, _by3 ) ) _external2 = false;
-            if ( _external3 ) and ( scr_line_on_triangle( _ax3, _ay3, _ax1, _ay1,   _bx1, _by1, _bx2, _by2, _bx3, _by3 ) ) _external3 = false;
-            
-        }
-        
-        if ( _bad_triangles_count &gt; 1 ) {
-            cout( _p, "bad tri", _bad_tri_a/e_triangle.size, _ax1, _ay1, _ax2, _ay2, _ax3, _ay3 );
-            cout( _p, "bad tri", "externals", _external1, _external2, _external3 );
-        }
-        
-        if ( _external1 ) {
-            _polygon[ e_polygon.x1 + _polygon_count ] = _ax1;
-            _polygon[ e_polygon.y1 + _polygon_count ] = _ay1;
-            _polygon[ e_polygon.x2 + _polygon_count ] = _ax2;
-            _polygon[ e_polygon.y2 + _polygon_count ] = _ay2;
-            _polygon_count += e_polygon.size;
-        }
-        
-        if ( _external2 ) {
-            _polygon[ e_polygon.x1 + _polygon_count ] = _ax2;
-            _polygon[ e_polygon.y1 + _polygon_count ] = _ay2;
-            _polygon[ e_polygon.x2 + _polygon_count ] = _ax3;
-            _polygon[ e_polygon.y2 + _polygon_count ] = _ay3;
-            _polygon_count += e_polygon.size;
-        }
-        
-        if ( _external3 ) {
-            _polygon[ e_polygon.x1 + _polygon_count ] = _ax3;
-            _polygon[ e_polygon.y1 + _polygon_count ] = _ay3;
-            _polygon[ e_polygon.x2 + _polygon_count ] = _ax1;
-            _polygon[ e_polygon.y2 + _polygon_count ] = _ay1;
-            _polygon_count += e_polygon.size;
-        }
-        
-    }
-    
-    //Delete bad triangles
-    for( var _b = _bad_triangles_count - 1; _b &gt;= 0; _b-- ) {
-        scr_array_delete( triangles, _bad_triangles[ _b ], e_triangle.size, triangles_count );
-        triangles_count -= e_triangle.size;
-    }
-    
-    //Go through the polygon and add new triangles
-    for( var _t = 0; _t &lt; _polygon_count; _t += e_polygon.size ) {
-        
-        var _tx1 = _px;
-        var _ty1 = _py;
-        var _tx2 = _polygon[ e_polygon.x1 + _t ];
-        var _ty2 = _polygon[ e_polygon.y1 + _t ];
-        var _tx3 = _polygon[ e_polygon.x2 + _t ];
-        var _ty3 = _polygon[ e_polygon.y2 + _t ];
-        var _cx  = scr_triangle_circumcircle_x( _tx1, _ty1, _tx2, _ty2, _tx3, _ty3 );
-        var _cy  = scr_triangle_circumcircle_y( _tx1, _ty1, _tx2, _ty2, _tx3, _ty3 );
-        var _r   = point_distance( _tx1, _ty1, _cx, _cy );
-        
-        cout( _p, "add tri", _t, _tx2, _ty2, _tx3, _ty3 );
-        
-        triangles[ e_triangle.x1 + triangles_count ] = _tx1;
-        triangles[ e_triangle.y1 + triangles_count ] = _ty1;
-        triangles[ e_triangle.x2 + triangles_count ] = _tx2;
-        triangles[ e_triangle.y2 + triangles_count ] = _ty2;
-        triangles[ e_triangle.x3 + triangles_count ] = _tx3;
-        triangles[ e_triangle.y3 + triangles_count ] = _ty3;
-        triangles[ e_triangle.cx + triangles_count ] = _cx;
-        triangles[ e_triangle.cy + triangles_count ] = _cy;
-        triangles[ e_triangle.r  + triangles_count ] = _r;
-        
-        triangles_count += e_triangle.size;
-        
-    }
-    
-}
-
-//Remove triangles that link to the starting triangle
-for( var _t = triangles_count - e_triangle.size; _t &gt;= 0; _t -= e_triangle.size ) {
-    
-    var _x1 = triangles[ e_triangle.x1 + _t ];
-    var _y1 = triangles[ e_triangle.y1 + _t ];
-    var _x2 = triangles[ e_triangle.x2 + _t ];
-    var _y2 = triangles[ e_triangle.y2 + _t ];
-    var _x3 = triangles[ e_triangle.x3 + _t ];
-    var _y3 = triangles[ e_triangle.y3 + _t ];
-    
-    if ( ( _x1 == _stx1 ) and ( _y1 == _sty1 ) ) or ( ( _x1 == _stx2 ) and ( _y1 == _sty2 ) ) or ( ( _x1 == _stx3 ) and ( _y1 == _sty3 ) )
-    or ( ( _x2 == _stx1 ) and ( _y2 == _sty1 ) ) or ( ( _x2 == _stx2 ) and ( _y2 == _sty2 ) ) or ( ( _x2 == _stx3 ) and ( _y2 == _sty3 ) )
-    or ( ( _x3 == _stx1 ) and ( _y3 == _sty1 ) ) or ( ( _x3 == _stx2 ) and ( _y3 == _sty2 ) ) or ( ( _x3 == _stx3 ) and ( _y3 == _sty3 ) ) {
-        
-        scr_array_delete( triangles, _t, e_triangle.size, triangles_count );
-        triangles_count -= e_triangle.size;
-        
-    }
-    
-}
-*/
 </string>
           </argument>
         </arguments>
@@ -312,21 +129,39 @@ for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
 /*
 for( var _y = 0; _y &lt; polygons_count; _y += e_polygon.size ) {
     
-    var _points       = polygons[ e_polygon.points + _y ];
-    var _points_count = polygons[ e_polygon.points_count + _y ];
+    var _polygon_points   = polygons[ _y + e_polygon.points ];
+    var _polygon_centre_x = polygons[ _y + e_polygon.centre_x ];
+    var _polygon_centre_y = polygons[ _y + e_polygon.centre_y ];
     
-    var _x1 = _points[ e_point.x ];
-    var _y1 = _points[ e_point.y ];
-    var _x2 = _points[ e_point.x + e_point.size ];
-    var _y2 = _points[ e_point.y + e_point.size ];
-    var _x3 = _points[ e_point.x + e_point.size*2 ];
-    var _y3 = _points[ e_point.y + e_point.size*2 ];
-    
+    draw_circle( _polygon_centre_x, _polygon_centre_y, 6, false );
     draw_set_colour( make_colour_hsv( 255 * _y / polygons_count, 200, 200 ) );
-    draw_triangle( _x1, _y1, _x2, _y2, _x3, _y3, false );
+    draw_circle( _polygon_centre_x, _polygon_centre_y, 5, false );
+    
+    draw_set_alpha( 0.2 );
+    draw_primitive_begin( pr_trianglefan );
+    draw_vertex( _polygon_centre_x, _polygon_centre_y );
+    
+    var _size = ds_list_size( _polygon_points );
+    for( var _i = 0; _i &lt; _size; _i += e_point.size ) {
+        draw_vertex( ds_list_find_value( _polygon_points, _i + e_point.x ), 
+                     ds_list_find_value( _polygon_points, _i + e_point.y ) );
+    }
+    draw_vertex( ds_list_find_value( _polygon_points, e_point.x ), 
+                 ds_list_find_value( _polygon_points, e_point.y ) );
+    draw_primitive_end();
+    draw_set_alpha( 1 );
+    
     draw_set_colour( c_black );
+    for( var _i = 0; _i &lt; _size; _i += e_point.size ) {
+        var _px = ds_list_find_value( _polygon_points, _i + e_point.x );
+        var _py = ds_list_find_value( _polygon_points, _i + e_point.y );
+        draw_arrow( _polygon_centre_x, _polygon_centre_y, _px, _py, 16 );
+        draw_text( mean( _polygon_centre_x, _px ), mean( _polygon_centre_y, _py ) - 20, _i );
+    }
     
 }
+
+draw_set_colour( c_black );
 */
 </string>
           </argument>
