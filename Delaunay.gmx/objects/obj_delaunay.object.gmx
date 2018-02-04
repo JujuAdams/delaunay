@@ -27,58 +27,31 @@
             <kind>1</kind>
             <string>///Create
 
-points_count = 0;
+//Use some anti-aliasing to make drawing a bit prettier!
+if ( display_aa &gt;= 8 ){
+    display_reset( 8, true );
+} else if ( display_aa &gt;= 4 ){
+    display_reset( 4, true );
+} else if ( display_aa &gt;= 2 ){
+    display_reset( 2, true );
+}
 
+//Run over all points in the room and drop their coordinates into an array
+points_count = 0;
 var _size = instance_number( obj_point );
 for( var _i = 0; _i &lt; _size; _i++ ) {
     var _inst = instance_find( obj_point, _i );
     
+    //The points array stores coordinates sequentially (x1,y1,x2,y2 etc.)
     points[ e_point.x + points_count ] = _inst.x;
     points[ e_point.y + points_count ] = _inst.y;
-    points_count += e_point.size;
     
+    points_count += e_point.size;
 }
 
-var _size = instance_number( obj_shape );
-for( var _i = 0; _i &lt; _size; _i++ ) {
-    var _inst = instance_find( obj_shape, _i );
-    
-    points[ e_point.x + points_count ] = _inst.bbox_left;
-    points[ e_point.y + points_count ] = _inst.bbox_top;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = _inst.bbox_right;
-    points[ e_point.y + points_count ] = _inst.bbox_top;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = _inst.bbox_left;
-    points[ e_point.y + points_count ] = _inst.bbox_bottom;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = _inst.bbox_right;
-    points[ e_point.y + points_count ] = _inst.bbox_bottom;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = mean( _inst.bbox_left, _inst.bbox_right );
-    points[ e_point.y + points_count ] = _inst.bbox_top;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = mean( _inst.bbox_left, _inst.bbox_right );
-    points[ e_point.y + points_count ] = _inst.bbox_bottom;
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = _inst.bbox_left;
-    points[ e_point.y + points_count ] = mean( _inst.bbox_top, _inst.bbox_bottom );
-    points_count += e_point.size;
-    
-    points[ e_point.x + points_count ] = _inst.bbox_right;
-    points[ e_point.y + points_count ] = mean( _inst.bbox_top, _inst.bbox_bottom );
-    points_count += e_point.size;
-    
-}
-
-scr_delaunay_bowyer_watson( points,   0, 0, room_width, room_height,   false );
-scr_convex_polys_from_triangles( triangles );
+//Run the algorithm!
+triangles = delaunay_bowyer_watson( points,   0, 0, room_width, room_height,   true );
+triangles_count = array_length_1d( triangles );
 </string>
           </argument>
         </arguments>
@@ -105,20 +78,22 @@ scr_convex_polys_from_triangles( triangles );
 
 for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
     
+    //If the mouse is over this triangle, draw it bright blue
     if ( point_in_triangle( mouse_x, mouse_y, 
                             triangles[ e_triangle.x1 + _t ], triangles[ e_triangle.y1 + _t ],
                             triangles[ e_triangle.x2 + _t ], triangles[ e_triangle.y2 + _t ],
                             triangles[ e_triangle.x3 + _t ], triangles[ e_triangle.y3 + _t ] ) ) {
-        draw_set_colour( c_red );
+        draw_set_colour( c_aqua );
     } else {
-        draw_set_colour( c_black );
+        draw_set_colour( c_white );
     }
     
-    draw_set_alpha( 0.2 );
+    //Draw a triangle with a slight outline
+    draw_set_alpha( 0.4 );
     draw_triangle( triangles[ e_triangle.x1 + _t ], triangles[ e_triangle.y1 + _t ],
                    triangles[ e_triangle.x2 + _t ], triangles[ e_triangle.y2 + _t ],
                    triangles[ e_triangle.x3 + _t ], triangles[ e_triangle.y3 + _t ], false );
-    draw_set_alpha( 0.4 );
+    draw_set_alpha( 0.7 );
     draw_triangle( triangles[ e_triangle.x1 + _t ], triangles[ e_triangle.y1 + _t ],
                    triangles[ e_triangle.x2 + _t ], triangles[ e_triangle.y2 + _t ],
                    triangles[ e_triangle.x3 + _t ], triangles[ e_triangle.y3 + _t ], true );
@@ -126,43 +101,7 @@ for( var _t = 0; _t &lt; triangles_count; _t += e_triangle.size ) {
     
 }
 
-/*
-for( var _y = 0; _y &lt; polygons_count; _y += e_polygon.size ) {
-    
-    var _polygon_points   = polygons[ _y + e_polygon.points ];
-    var _polygon_centre_x = polygons[ _y + e_polygon.centre_x ];
-    var _polygon_centre_y = polygons[ _y + e_polygon.centre_y ];
-    
-    draw_circle( _polygon_centre_x, _polygon_centre_y, 6, false );
-    draw_set_colour( make_colour_hsv( 255 * _y / polygons_count, 200, 200 ) );
-    draw_circle( _polygon_centre_x, _polygon_centre_y, 5, false );
-    
-    draw_set_alpha( 0.2 );
-    draw_primitive_begin( pr_trianglefan );
-    draw_vertex( _polygon_centre_x, _polygon_centre_y );
-    
-    var _size = ds_list_size( _polygon_points );
-    for( var _i = 0; _i &lt; _size; _i += e_point.size ) {
-        draw_vertex( ds_list_find_value( _polygon_points, _i + e_point.x ), 
-                     ds_list_find_value( _polygon_points, _i + e_point.y ) );
-    }
-    draw_vertex( ds_list_find_value( _polygon_points, e_point.x ), 
-                 ds_list_find_value( _polygon_points, e_point.y ) );
-    draw_primitive_end();
-    draw_set_alpha( 1 );
-    
-    draw_set_colour( c_black );
-    for( var _i = 0; _i &lt; _size; _i += e_point.size ) {
-        var _px = ds_list_find_value( _polygon_points, _i + e_point.x );
-        var _py = ds_list_find_value( _polygon_points, _i + e_point.y );
-        draw_arrow( _polygon_centre_x, _polygon_centre_y, _px, _py, 16 );
-        draw_text( mean( _polygon_centre_x, _px ), mean( _polygon_centre_y, _py ) - 20, _i );
-    }
-    
-}
-
-draw_set_colour( c_black );
-*/
+draw_text( 10, 10, "Delaunay algorithm implementation#2018/02/04##@jujuadams" );
 </string>
           </argument>
         </arguments>

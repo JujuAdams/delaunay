@@ -23,7 +23,7 @@ for( var _t = 0; _t < triangles_count; _t += e_triangle.size ) {
     
 }
 
-polygons[] = undefined;
+polygons[0] = undefined;
 polygons_count = 0;
 
 var _points;

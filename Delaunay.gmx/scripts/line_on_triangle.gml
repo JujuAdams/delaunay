@@ -1,4 +1,4 @@
-///scr_line_on_triangle( x1, y1, x2, y2, px1, py1, px2, py2, px3, py3 )
+///line_on_triangle( x1, y1, x2, y2, px1, py1, px2, py2, px3, py3 )
 
 var _x1 = argument0;
 var _y1 = argument1;
