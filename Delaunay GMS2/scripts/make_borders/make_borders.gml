@@ -140,9 +140,7 @@ while( !ds_map_empty( _unvisited_map ) )
 			//If we've looped back round to where we started, break
 			if ( _p == _path_first_node ) && ( _e == _path_first_edge )
 			{
-				var _smoothed_path = path_create_smoothed( _path, 0.2, 0.01, false );
-				path_delete( _path );
-				_path_array[@ _path_count + e_border.path   ] = _smoothed_path;
+				_path_array[@ _path_count + e_border.path   ] = _path;
 				_path_array[@ _path_count + e_border.colour ] = _p_colour;
 				_path_count += e_border.size;
 				_p = undefined;
