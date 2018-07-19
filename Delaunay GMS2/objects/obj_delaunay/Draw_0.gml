@@ -1,6 +1,6 @@
 var _triangles_count = array_length_1d( triangle_array );
 var _edges_count     = array_length_1d( edge_array     );
-var _points_count    = array_length_1d( point_array    );
+var _nodes_count    = array_length_1d( node_array    );
 var _borders_count   = array_length_1d( border_array   );
 /*
 draw_set_colour( c_white );
@@ -30,24 +30,24 @@ for( var _e = 0; _e < _edges_count; _e += e_edge.size )
 */
 
 draw_set_colour( c_gray );
-for( var _p = 0; _p < _points_count; _p += e_point.size )
+for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 {
-	var _inst   = point_array[ _p + e_point.inst   ];
-	var _x      = point_array[ _p + e_point.x      ];
-	var _y      = point_array[ _p + e_point.y      ];
-	var _colour = point_array[ _p + e_point.colour ];
+	var _inst   = node_array[ _p + e_node.inst   ];
+	var _x      = node_array[ _p + e_node.x      ];
+	var _y      = node_array[ _p + e_node.y      ];
+	var _colour = node_array[ _p + e_node.colour ];
 	
-	if ( _inst.object_index == obj_perimeter_point ) continue;
+	if ( _inst.object_index == obj_perimeter_node ) continue;
 	if ( _colour == c_black ) continue;
 	draw_set_colour( _colour );
 	/*
 	if ( point_distance( mouse_x, mouse_y, _x, _y ) < 10 )
 	{
-		var _point_edge_array = point_array[ _p + e_point.edges ];
-		var _point_edges_count = array_length_1d( _point_edge_array );
-		for( var _e = 0; _e < _point_edges_count; _e++ )
+		var _node_edge_array = node_array[ _p + e_node.edges ];
+		var _node_edges_count = array_length_1d( _node_edge_array );
+		for( var _e = 0; _e < _node_edges_count; _e++ )
 		{
-			var _edge_id = _point_edge_array[ _e ];
+			var _edge_id = _node_edge_array[ _e ];
 		    var _x1 = edge_array[ _edge_id + e_edge.x1 ];
 		    var _y1 = edge_array[ _edge_id + e_edge.y1 ];
 		    var _x2 = edge_array[ _edge_id + e_edge.x2 ];
@@ -80,7 +80,7 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 }
 
 draw_set_colour( c_white );
-draw_text( 10, 10, "Delaunay algorithm implementation\n2018/02/04\n\n@jujuadams\n\n"
+draw_text( 10, 10, "Delaunay algorithm implementation + Region maker\n2018/07/20\n\n@jujuadams\n\n"
                  + string( _triangles_count / e_triangle.size ) + " triangles\n"
 				 + string( _edges_count / e_edge.size ) + " edges\n"
 				 + string( _borders_count / e_border.size ) + " borders" );

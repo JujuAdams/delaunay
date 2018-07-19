@@ -1,4 +1,4 @@
-/// @param  points
+/// @param  nodes
 /// @param  triangles_array_out
 /// @param  left
 /// @param  top
@@ -6,7 +6,7 @@
 /// @param  bottom
 /// @param  remove border 
 
-var _points        = argument0;
+var _nodes        = argument0;
 var _out_triangles = argument1;
 var _left          = argument2;
 var _top           = argument3;
@@ -75,13 +75,13 @@ _triangles_count += e_triangle.size;
 
 
 
-//Check for triangles that have points inside of them - we obviously don't want them!
-var _points_count = array_length_1d( _points );
-for( var _p = 0; _p < _points_count; _p += e_point.size ) {
+//Check for triangles that have nodes inside of them - we obviously don't want them!
+var _nodes_count = array_length_1d( _nodes );
+for( var _p = 0; _p < _nodes_count; _p += e_node.size ) {
     
-    //Grab point data from the array
-    var _px = _points[ e_point.x + _p ];
-    var _py = _points[ e_point.y + _p ];
+    //Grab node data from the array
+    var _px = _nodes[ e_node.x + _p ];
+    var _py = _nodes[ e_node.y + _p ];
     
     //Make a new variable to store the "bad triangles"
     var _bad_triangles = undefined;
@@ -89,7 +89,7 @@ for( var _p = 0; _p < _points_count; _p += e_point.size ) {
     
     //Iterate over all the triangles...
     for( var _t = 0; _t < _triangles_count; _t += e_triangle.size ) {
-        //If the distance from the circle to the point, the point is inside the circle
+        //If the distance from the circle to the node, the node is inside the circle
         if ( point_distance( _px, _py, _triangles[ e_triangle.cx + _t ], _triangles[ e_triangle.cy + _t ] ) <= _triangles[ e_triangle.r + _t ] ) {
             //...and if so, add this triangle to our "bad triangles" array
             _bad_triangles[ _bad_triangles_count ] = _t;
@@ -177,7 +177,7 @@ for( var _p = 0; _p < _points_count; _p += e_point.size ) {
     
     for( var _t = 0; _t < _edge_count; _t += e_edge.size ) {
         
-        //Build a new triangle from the point we're examining and a edge that's *not* shared by any two bad triangles
+        //Build a new triangle from the node we're examining and a edge that's *not* shared by any two bad triangles
         var _tx1 = _px;
         var _ty1 = _py;
         var _tx2 = _edge[ e_edge.x1 + _t ];
@@ -236,14 +236,14 @@ for( var _t = _triangles_count-1; _t >= 0; _t-- ) _out_triangles[@ _t ] = _trian
 return true;
 
 /*
-function BowyerWatson (pointList)
-      // pointList is a set of coordinates defining the points to be triangulated
+function BowyerWatson (nodeList)
+      // nodeList is a set of coordinates defining the nodes to be triangulated
       triangulation := empty triangle mesh data structure
-      add super-triangle to triangulation // must be large enough to completely contain all the points in pointList
-      for each point in pointList do // add all the points one at a time to the triangulation
+      add super-triangle to triangulation // must be large enough to completely contain all the nodes in nodeList
+      for each node in nodeList do // add all the nodes one at a time to the triangulation
          badTriangles := empty set
          for each triangle in triangulation do // first find all the triangles that are no longer valid due to the insertion
-            if point is inside circumcircle of triangle
+            if node is inside circumcircle of triangle
                add triangle to badTriangles
          polygon := empty set
          for each triangle in badTriangles do // find the boundary of the polygonal hole
@@ -253,9 +253,9 @@ function BowyerWatson (pointList)
          for each triangle in badTriangles do // remove them from the data structure
             remove triangle from triangulation
          for each edge in polygon do // re-triangulate the polygonal hole
-            newTri := form a triangle from edge to point
+            newTri := form a triangle from edge to node
             add newTri to triangulation
-      for each triangle in triangulation // done inserting points, now clean up
+      for each triangle in triangulation // done inserting nodes, now clean up
          if triangle contains a vertex from original super-triangle
             remove triangle from triangulation
       return triangulation

@@ -11,7 +11,7 @@
 //  
 //  return   : If successful, the ID of the new path (return >= 0). If unsuccessful, returns "noone" (return = -4).
 
-var path, detail, tightness, newClosed, closed, points, limit;
+var path, detail, tightness, newClosed, closed, nodes, limit;
 var x0, x1, x2, x3, y0, y1, y2, y3, i, iLoop;
 var t, xx, yy, Ox, Oy;
 
@@ -20,10 +20,10 @@ detail = argument1;
 tightness = argument2;
 newClosed = argument3;
 
-points = path_get_number( path );
+nodes = path_get_number( path );
 
-if ( points < 3 ) {
-    show_debug_message( "path_create_smoothed: too few points (" + string( points ) + ")! path=" + string( path ) );
+if ( nodes < 3 ) {
+    show_debug_message( "path_create_smoothed: too few nodes (" + string( nodes ) + ")! path=" + string( path ) );
     return noone;
 }
 
@@ -44,8 +44,8 @@ if ( closed ) {
     x3 = path_get_point_x( path, 2 );
     y3 = path_get_point_y( path, 2 );
     
-    for( i = 0; i < points; i++ ) {
-        iLoop = ( i + 3 ) mod points;
+    for( i = 0; i < nodes; i++ ) {
+        iLoop = ( i + 3 ) mod nodes;
         
         x0 = x1; y0 = y1;
         x1 = x2; y1 = y2;
@@ -60,7 +60,7 @@ if ( closed ) {
             Oy = lerp( y1, y2, t );
             xx = lerp( xx, Ox, tightness );
             yy = lerp( yy, Oy, tightness );
-            path_add_point( newPath, xx, yy, lerp( path_get_point_speed( path, i ), path_get_point_speed( path, ( i + 1 ) mod points ), t ) );
+            path_add_point( newPath, xx, yy, lerp( path_get_point_speed( path, i ), path_get_point_speed( path, ( i + 1 ) mod nodes ), t ) );
         }
         
     }
@@ -76,8 +76,8 @@ if ( closed ) {
     x3 = path_get_point_x( path, 1 );
     y3 = path_get_point_y( path, 1 );
     
-    for( i = 0; i < points - 1; i++ ) {
-        iLoop = min( points - 1, i + 2 );
+    for( i = 0; i < nodes - 1; i++ ) {
+        iLoop = min( nodes - 1, i + 2 );
         
         x0 = x1; y0 = y1;
         x1 = x2; y1 = y2;
@@ -97,7 +97,7 @@ if ( closed ) {
         
     }
     
-    path_add_point( newPath, path_get_point_x( path, points - 1 ), path_get_point_y( path, points - 1 ), path_get_point_speed( path, points - 1 ) );
+    path_add_point( newPath, path_get_point_x( path, nodes - 1 ), path_get_point_y( path, nodes - 1 ), path_get_point_speed( path, nodes - 1 ) );
     path_set_closed( newPath, false );
     
 }

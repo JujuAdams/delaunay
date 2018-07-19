@@ -202,7 +202,7 @@
             "Key": "860dc0c8-d045-4952-86c4-4db71237aba8",
             "Value": {
                 "id": "765f29a1-7586-4c2f-8e22-0a10fa7f7092",
-                "resourcePath": "scripts\\points_assign_edges\\points_assign_edges.yy",
+                "resourcePath": "scripts\\nodes_assign_edges\\nodes_assign_edges.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -226,7 +226,7 @@
             "Key": "8bfb202c-96a6-4ad0-9294-a101892c50f4",
             "Value": {
                 "id": "f5ae3301-ac64-4f2e-8a25-612e84ffe900",
-                "resourcePath": "objects\\obj_point\\obj_point.yy",
+                "resourcePath": "objects\\obj_node\\obj_node.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -354,7 +354,7 @@
             "Key": "df63e8d9-fda9-4ef9-8cc6-ab7b7d1384e9",
             "Value": {
                 "id": "83f03901-4f2b-4099-9ec2-3c8becfd0280",
-                "resourcePath": "scripts\\edges_associate_points\\edges_associate_points.yy",
+                "resourcePath": "scripts\\edges_associate_nodes\\edges_associate_nodes.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -370,7 +370,7 @@
             "Key": "e7db1a3c-3461-4de3-a68f-b2f2acee9075",
             "Value": {
                 "id": "6a36388d-a425-4275-8cb7-4b11b8d6562e",
-                "resourcePath": "objects\\obj_perimeter_point\\obj_perimeter_point.yy",
+                "resourcePath": "objects\\obj_perimeter_node\\obj_perimeter_node.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -378,7 +378,7 @@
             "Key": "edcf6d4a-cc67-4eb3-949d-f0bb4278447f",
             "Value": {
                 "id": "d8fbacdb-64ff-41c3-9682-8f3af76e5b92",
-                "resourcePath": "scripts\\points_sort_edges\\points_sort_edges.yy",
+                "resourcePath": "scripts\\nodes_sort_edges\\nodes_sort_edges.yy",
                 "resourceType": "GMScript"
             }
         },

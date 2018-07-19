@@ -1,19 +1,19 @@
 /// @param path_array
-/// @param point_array
+/// @param node_array
 /// @param edge_array
-/// @param point_lookup_map
+/// @param node_lookup_map
 
 var _path_array       = argument0;
-var _point_array      = argument1;
+var _node_array      = argument1;
 var _edge_array       = argument2;
-var _point_lookup_map = argument3;
+var _node_lookup_map = argument3;
 
 var _path_count = array_length_1d( _path_array );
 
-//Fill a map with every point we need to visit
-var _points_count = array_length_1d( _point_array );
+//Fill a map with every node we need to visit
+var _nodes_count = array_length_1d( _node_array );
 var _unvisited_map = ds_map_create();
-for( var _p = 0; _p < _points_count; _p += e_point.size ) _unvisited_map[? _p ] = _p;
+for( var _p = 0; _p < _nodes_count; _p += e_node.size ) _unvisited_map[? _p ] = _p;
 
 //Set up P to be undefined - this forces the algo to pick the first available unvisited node
 var _p = undefined;
@@ -28,9 +28,9 @@ while( !ds_map_empty( _unvisited_map ) )
 		var _p = ds_map_find_first( _unvisited_map );
 		ds_map_delete( _unvisited_map, _p );
 		
-		//If this point is a perimeter point, ignore it
-		var _inst = _point_array[ _p + e_point.inst ];
-		if ( _inst.object_index == obj_perimeter_point )
+		//If this node is a perimeter node, ignore it
+		var _inst = _node_array[ _p + e_node.inst ];
+		if ( _inst.object_index == obj_perimeter_node )
 		{
 			_p = undefined;
 			continue;
@@ -39,7 +39,7 @@ while( !ds_map_empty( _unvisited_map ) )
 		//Select our starting edge as 0
 		var _start_e = 0;
 		
-		//Create a new path and initialise our start point as nowhere, man
+		//Create a new path and initialise our start node as nowhere, man
 		var _path = path_add();
 		var _path_first_node = undefined;
 		var _path_first_edge = undefined;
@@ -51,22 +51,22 @@ while( !ds_map_empty( _unvisited_map ) )
 	}
 	
 	//Collect data about P
-	var _px          = _point_array[ _p + e_point.x      ];
-	var _py          = _point_array[ _p + e_point.y      ];
-	var _p_colour    = _point_array[ _p + e_point.colour ];
+	var _px          = _node_array[ _p + e_node.x      ];
+	var _py          = _node_array[ _p + e_node.y      ];
+	var _p_colour    = _node_array[ _p + e_node.colour ];
 	
 	//Iterate over every edge on P (or at least until we need to hop to another node)
-	var _point_edges = _point_array[ _p + e_point.edges  ];
-	var _point_edges_count = array_length_1d( _point_edges );
+	var _node_edges = _node_array[ _p + e_node.edges  ];
+	var _node_edges_count = array_length_1d( _node_edges );
 	
 	//Because we can start at any edge, we need to handle wrapping around P's list of edges
-	var _end_e = _start_e + _point_edges_count;
+	var _end_e = _start_e + _node_edges_count;
 	for( var _offset_e = _start_e; _offset_e <= _end_e; _offset_e++ )
 	{
-		var _e = _offset_e mod _point_edges_count;
+		var _e = _offset_e mod _node_edges_count;
 		
 		//Find our edge in the global list and extract information about it
-		var _edge_id = _point_edges[ _e ];
+		var _edge_id = _node_edges[ _e ];
 		var _x1 = _edge_array[ _edge_id + e_edge.x1 ];
 		var _y1 = _edge_array[ _edge_id + e_edge.y1 ];
 		var _x2 = _edge_array[ _edge_id + e_edge.x2 ];
@@ -90,9 +90,9 @@ while( !ds_map_empty( _unvisited_map ) )
 		}
 		
 		//Set Q as the id of the node at the end other of the edge
-		var _q = _point_lookup_map[? string( _qx ) + "," + string( _qy ) ];
+		var _q = _node_lookup_map[? string( _qx ) + "," + string( _qy ) ];
 		
-		var _q_colour = _point_array[ _q + e_point.colour ];
+		var _q_colour = _node_array[ _q + e_node.colour ];
 		if ( _q_colour == _p_colour )
 		{
 			//Q's colour is the same as P's
@@ -105,11 +105,11 @@ while( !ds_map_empty( _unvisited_map ) )
 			
 			//Find out which edge to start from on Q
 			_start_e = undefined;
-			var _point_edges = _point_array[ _q + e_point.edges ];
-			var _point_edges_count = array_length_1d( _point_edges );
-			for( var _search_e = 0; _search_e < _point_edges_count; _search_e++ )
+			var _node_edges = _node_array[ _q + e_node.edges ];
+			var _node_edges_count = array_length_1d( _node_edges );
+			for( var _search_e = 0; _search_e < _node_edges_count; _search_e++ )
 			{
-				if ( _point_edges[ _search_e ] == _edge_id )
+				if ( _node_edges[ _search_e ] == _edge_id )
 				{
 					_start_e = _search_e;
 					break;
@@ -118,7 +118,7 @@ while( !ds_map_empty( _unvisited_map ) )
 			
 			if ( _start_e == undefined )
 			{
-				//If we can't find the edge for P in Q, abort and try another point
+				//If we can't find the edge for P in Q, abort and try another node
 				show_error( "Hmn.", false );
 				path_delete( _path );
 				_q = undefined;
@@ -149,10 +149,10 @@ while( !ds_map_empty( _unvisited_map ) )
 				break;
 			}
 			
-			//Add the midpoint of the edge to the boundary
+			//Add the midnode of the edge to the boundary
 			path_add_point( _path, lerp( _px, _qx, 0.46 ), lerp( _py, _qy, 0.46 ), 100 );
 			
-			//If this is the path's first border point, make a note of it so we don't go round in circles
+			//If this is the path's first border node, make a note of it so we don't go round in circles
 			if ( _path_first_node == undefined ) _path_first_node = _p;
 			if ( _path_first_edge == undefined ) _path_first_edge = _e;
 		}
