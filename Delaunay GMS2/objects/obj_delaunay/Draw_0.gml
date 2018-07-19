@@ -28,7 +28,7 @@ for( var _e = 0; _e < _edges_count; _e += e_edge.size )
 	draw_text( _mx, _my, "E" + string( _e ) );
 }
 */
-
+/*
 draw_set_colour( c_gray );
 for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 {
@@ -40,7 +40,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 	if ( _inst.object_index == obj_perimeter_node ) continue;
 	if ( _colour == c_black ) continue;
 	draw_set_colour( _colour );
-	/*
+	
 	if ( point_distance( mouse_x, mouse_y, _x, _y ) < 10 )
 	{
 		var _node_edge_array = node_array[ _p + e_node.edges ];
@@ -60,11 +60,10 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 		}
 	}
 	draw_text( _x + 10, _y - 20, "P" + string( _p ) );
-	*/
     draw_circle( _x, _y, 5, false );
 	draw_set_colour( c_white );
 }
-
+*/
 for( var _b = 0; _b < _borders_count; _b += e_border.size )
 {
 	var _path   = border_array[ _b + e_border.path   ];
