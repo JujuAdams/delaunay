@@ -159,9 +159,11 @@ while( !ds_map_empty( _unvisited_map ) )
 			if ( _p == _path_first_node ) && ( _e == _path_first_edge )
 			{
 				show_debug_message( "New path " + string( _path ) + ", node count=" + string( path_get_number( _path ) ) );
-				_path_array[@ _path_count + e_border.path        ] = _path;
-				_path_array[@ _path_count + e_border.colour      ] = _p_colour;
-				_path_array[@ _path_count + e_border.point_array ] = _path_point_array;
+				_path_array[@ _path_count + e_border.path           ] = _path;
+				_path_array[@ _path_count + e_border.colour         ] = _p_colour;
+				_path_array[@ _path_count + e_border.point_array    ] = _path_point_array;
+				_path_array[@ _path_count + e_border.triangle_array ] = array_create( 0 );
+				_path_array[@ _path_count + e_border.vbuff          ] = undefined;
 				_path_count += e_border.size;
 				_p = undefined;
 				break;

@@ -113,4 +113,26 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 	
 	_border_array[@ _b + e_border.triangle_array ] = _triangle_array;
 	ds_list_destroy( _list );
+	
+	if ( _triangle_count > 0 )
+	{
+		var _vbuff = vertex_create_buffer();
+		vertex_begin( _vbuff, global.vft_2d_untextured );
+		for( var _t = 0; _t < _triangle_count; _t += e_triangle.size )
+		{
+		    var _x1 = _triangle_array[ e_triangle.x1 + _t ];
+			var _y1 = _triangle_array[ e_triangle.y1 + _t ];
+		    var _x2 = _triangle_array[ e_triangle.x2 + _t ];
+			var _y2 = _triangle_array[ e_triangle.y2 + _t ];
+		    var _x3 = _triangle_array[ e_triangle.x3 + _t ];
+			var _y3 = _triangle_array[ e_triangle.y3 + _t ];
+		
+			vertex_position( _vbuff, _x1, _y1 ); vertex_colour( _vbuff, c_white, 1 );
+			vertex_position( _vbuff, _x2, _y2 ); vertex_colour( _vbuff, c_white, 1 );
+			vertex_position( _vbuff, _x3, _y3 ); vertex_colour( _vbuff, c_white, 1 );
+		}
+		vertex_end( _vbuff );
+		vertex_freeze( _vbuff );
+		_border_array[@ _b + e_border.vbuff ] = _vbuff;
+	}
 }
