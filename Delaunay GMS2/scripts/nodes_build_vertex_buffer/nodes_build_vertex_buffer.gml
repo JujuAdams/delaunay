@@ -1,10 +1,12 @@
 /// @param node_array
 /// @param edge_array
 /// @param node_lookup_map
+/// @param border_lerp
 
 var _node_array      = argument0;
 var _edge_array      = argument1;
 var _node_lookup_map = argument2;
+var _border_lerp     = argument3;
 
 var _nodes_count = array_length_1d( _node_array );
 for( var _p = 0; _p < _nodes_count; _p += e_node.size )
@@ -58,8 +60,8 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 			break;
 		}
 		
-		_qx = lerp( _px, _qx, 0.5 );
-		_qy = lerp( _py, _qy, 0.5 );
+		_qx = lerp( _px, _qx, _border_lerp );
+		_qy = lerp( _py, _qy, _border_lerp );
 		
 		if ( _offset_e != 0 )
 		{

@@ -73,7 +73,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 		}
 		*/
 	}
-	draw_text( _x + 10, _y - 20, "P" + string( _p ) );
+	//draw_text( _x + 10, _y - 20, "P" + string( _p ) );
     draw_circle( _x, _y, 20, false );
 	draw_set_colour( c_white );
 }
@@ -92,7 +92,7 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 		                      colour_get_red(   _colour )/255,
 							  colour_get_green( _colour )/255,
 							  colour_get_blue(  _colour )/255,
-							  lerp( 0.15, 0.2, 0.5+0.5*dsin( _b*40 + current_time/9 ) ) );
+							  0.2 );//lerp( 0.15, 0.2, 0.5+0.5*dsin( _b*40 + current_time/9 ) ) );
 		vertex_submit( _vbuff, pr_trianglelist, -1 );
 		shader_reset();
 	}

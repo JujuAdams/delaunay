@@ -60,9 +60,9 @@ nodes_sort_edges( node_array, edge_array );
 
 //Make borders around each set of nodes
 border_array = array_create( 0 );
-make_borders( border_array, node_array, edge_array, node_lookup_map );
+make_borders( border_array, node_array, edge_array, node_lookup_map, 10 );
 
-smooth_borders( border_array, 3, 50 );
+smooth_borders( border_array, 5, 100 );
 
 //And prettify the borders a bit
 borders_make_vertex_buffer( border_array );
