@@ -159,11 +159,27 @@
             }
         },
         {
+            "Key": "5944dbc2-fae7-4a5b-b108-f9662936b024",
+            "Value": {
+                "id": "ad973b52-f818-452a-ad23-059755acc4bf",
+                "resourcePath": "datafiles_yy\\debug.txt.yy",
+                "resourceType": "GMIncludedFile"
+            }
+        },
+        {
             "Key": "59f2bdf9-1c89-41ab-862f-7a94cdd6e626",
             "Value": {
                 "id": "512420af-165d-401f-8dff-696e0a97349c",
                 "resourcePath": "scripts\\array_delete\\array_delete.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "6025abf7-627b-4608-b490-912681eea8af",
+            "Value": {
+                "id": "2858be40-7b37-490c-9942-269be98c622f",
+                "resourcePath": "fonts\\fnt_default\\fnt_default.yy",
+                "resourceType": "GMFont"
             }
         },
         {

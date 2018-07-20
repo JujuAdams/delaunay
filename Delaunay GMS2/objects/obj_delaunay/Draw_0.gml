@@ -1,8 +1,10 @@
+draw_set_font( fnt_default );
+
 var _triangles_count = array_length_1d( triangle_array );
 var _edges_count     = array_length_1d( edge_array     );
-var _nodes_count    = array_length_1d( node_array    );
+var _nodes_count     = array_length_1d( node_array     );
 var _borders_count   = array_length_1d( border_array   );
-/*
+
 draw_set_colour( c_white );
 draw_set_alpha( 0.4 );
 for( var _t = 0; _t < _triangles_count; _t += e_triangle.size )
@@ -12,8 +14,7 @@ for( var _t = 0; _t < _triangles_count; _t += e_triangle.size )
                    triangle_array[ e_triangle.x3 + _t ], triangle_array[ e_triangle.y3 + _t ], false );
 }
 draw_set_alpha( 1 );
-*/
-/*
+
 draw_set_colour( c_white );
 for( var _e = 0; _e < _edges_count; _e += e_edge.size )
 {
@@ -27,8 +28,7 @@ for( var _e = 0; _e < _edges_count; _e += e_edge.size )
 	var _my = 0.5*( _y1 + _y2 );
 	draw_text( _mx, _my, "E" + string( _e ) );
 }
-*/
-/*
+
 draw_set_colour( c_gray );
 for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 {
@@ -38,10 +38,9 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 	var _colour = node_array[ _p + e_node.colour ];
 	
 	if ( _inst.object_index == obj_perimeter_node ) continue;
-	if ( _colour == c_black ) continue;
 	draw_set_colour( _colour );
 	
-	if ( point_distance( mouse_x, mouse_y, _x, _y ) < 10 )
+	if ( point_distance( mouse_x, mouse_y, _x, _y ) < 50 )
 	{
 		var _node_edge_array = node_array[ _p + e_node.edges ];
 		var _node_edges_count = array_length_1d( _node_edge_array );
@@ -60,22 +59,26 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 		}
 	}
 	draw_text( _x + 10, _y - 20, "P" + string( _p ) );
-    draw_circle( _x, _y, 5, false );
+    draw_circle( _x, _y, 20, false );
 	draw_set_colour( c_white );
 }
-*/
+
 for( var _b = 0; _b < _borders_count; _b += e_border.size )
 {
 	var _path   = border_array[ _b + e_border.path   ];
 	var _colour = border_array[ _b + e_border.colour ];
 	
 	draw_set_colour( _colour );
-	for( var _y = -1; _y <= 1; _y++ ) for( var _x = -1; _x <= 1; _x++ )
+	var _path_nodes_count = path_get_number( _path );
+	for( var _p = 0; _p < _path_nodes_count; _p++ )
 	{
-		matrix_set( matrix_world, matrix_build( _x, _y, 0,   0, 0, 0,   1, 1, 1 ) );
-		draw_path( _path, 0, 0, true );
+		var _p_next = (_p+1) mod _path_nodes_count;
+		var _x1 = path_get_point_x( _path, _p      );
+		var _y1 = path_get_point_y( _path, _p      );
+		var _x2 = path_get_point_x( _path, _p_next );
+		var _y2 = path_get_point_y( _path, _p_next );
+		draw_line_width( _x1, _y1, _x2, _y2, 5 );
 	}
-	matrix_set( matrix_world, matrix_build_identity() );
 }
 
 draw_set_colour( c_white );

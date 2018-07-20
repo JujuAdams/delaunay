@@ -44,7 +44,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 		
 		var _direction = point_direction( _px, _py, _qx, _qy );
 		var _direction_big = floor( _direction*100000 ) * 100000;
-		var _weight = _edge_id + _direction_big;
+		var _weight = (_edge_id / e_edge.size) + _direction_big;
 		ds_list_add( _list, _weight );
 	}
 	
@@ -55,7 +55,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 	{
 		var _weight = _list[| _e ];
 		var _subtractor = floor( _weight / 100000 ) * 100000;
-		var _edge_id = _weight - _subtractor;
+		var _edge_id = (_weight - _subtractor) * e_edge.size;
 		_node_edge_array[@ _e ] = _edge_id;
 	}
 }

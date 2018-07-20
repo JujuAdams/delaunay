@@ -27,6 +27,7 @@ enum e_edge {
 }
 enum e_border {
 	path,
+	point_array,
 	colour,
 	size
 }

@@ -28,10 +28,13 @@ while( !ds_map_empty( _unvisited_map ) )
 		var _p = ds_map_find_first( _unvisited_map );
 		ds_map_delete( _unvisited_map, _p );
 		
+		show_debug_message( "Pulling point " + string( _p ) + " as P" );
+		
 		//If this node is a perimeter node, ignore it
 		var _inst = _node_array[ _p + e_node.inst ];
 		if ( _inst.object_index == obj_perimeter_node )
 		{
+			show_debug_message( "P is perimeter, ignoring" );
 			_p = undefined;
 			continue;
 		}
@@ -48,12 +51,14 @@ while( !ds_map_empty( _unvisited_map ) )
 	{
 		//If P was set in a previous loop, then we'll need to remove that node from our list of unvisited nodes
 		ds_map_delete( _unvisited_map, _p );
+		show_debug_message( "New iteration, P is " + string( _p ) );
 	}
 	
 	//Collect data about P
 	var _px          = _node_array[ _p + e_node.x      ];
 	var _py          = _node_array[ _p + e_node.y      ];
 	var _p_colour    = _node_array[ _p + e_node.colour ];
+	show_debug_message( "P's colour is " + string( _p_colour ) );
 	
 	//Iterate over every edge on P (or at least until we need to hop to another node)
 	var _node_edges = _node_array[ _p + e_node.edges  ];
@@ -64,6 +69,7 @@ while( !ds_map_empty( _unvisited_map ) )
 	for( var _offset_e = _start_e; _offset_e <= _end_e; _offset_e++ )
 	{
 		var _e = _offset_e mod _node_edges_count;
+		show_debug_message( "    E is " + string( _e ) + " of " + string( _node_edges_count-1 ) );
 		
 		//Find our edge in the global list and extract information about it
 		var _edge_id = _node_edges[ _e ];
@@ -85,20 +91,28 @@ while( !ds_map_empty( _unvisited_map ) )
 		}
 		else
 		{
-			show_error( "Err...", false );
-			continue;
+			show_error( "Cannot find P on edge. Skipping this boundary", false );
+			path_delete( _path );
+			_p = undefined;
+			break;
 		}
+		
+		show_debug_message( "        Other end is at " + string( _qx ) + "," + string( _qy ) );
 		
 		//Set Q as the id of the node at the end other of the edge
 		var _q = _node_lookup_map[? string( _qx ) + "," + string( _qy ) ];
+		show_debug_message( "        Q is " + string( _q ) );
 		
 		var _q_colour = _node_array[ _q + e_node.colour ];
+		show_debug_message( "        Q's colour is " + string( _q_colour ) );
 		if ( _q_colour == _p_colour )
 		{
 			//Q's colour is the same as P's
+			show_debug_message( "        Q's colour is the same" );
 			
 			if ( _path_first_node == undefined ) && ( _path_first_edge == undefined )
 			{
+				show_debug_message( "        The path has not yet found a differently coloured node, looping E-loop" );
 				//If we've not yet found our first differentially coloured connection for this border, keep searching
 				continue;
 			}
@@ -119,15 +133,17 @@ while( !ds_map_empty( _unvisited_map ) )
 			if ( _start_e == undefined )
 			{
 				//If we can't find the edge for P in Q, abort and try another node
-				show_error( "Hmn.", false );
+				show_error( "Cannot find P's edge in Q. Skipping this boundary\n ", false );
 				path_delete( _path );
-				_q = undefined;
+				_p = undefined;
+				break;
 			}
 			else
 			{
 				_start_e++;
 			}
 			
+			show_debug_message( "            Transferring to " + string( _q ) );
 			//"Q is the new P, darling"
 			_p = _q;
 			
@@ -140,6 +156,7 @@ while( !ds_map_empty( _unvisited_map ) )
 			//If we've looped back round to where we started, break
 			if ( _p == _path_first_node ) && ( _e == _path_first_edge )
 			{
+				show_debug_message( "New path " + string( _path ) + ", node count=" + string( path_get_number( _path ) ) );
 				_path_array[@ _path_count + e_border.path   ] = _path;
 				_path_array[@ _path_count + e_border.colour ] = _p_colour;
 				_path_count += e_border.size;
@@ -154,5 +171,10 @@ while( !ds_map_empty( _unvisited_map ) )
 			if ( _path_first_node == undefined ) _path_first_node = _p;
 			if ( _path_first_edge == undefined ) _path_first_edge = _e;
 		}
+	}
+	if ( _offset_e > _end_e )
+	{
+		show_debug_message( "    P cannot find a different coloured node, must be internal. Choosing new P" );
+		_p = undefined;
 	}
 }
