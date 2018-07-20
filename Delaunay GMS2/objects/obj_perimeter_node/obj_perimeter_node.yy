@@ -4,7 +4,16 @@
     "mvc": "1.0",
     "name": "obj_perimeter_node",
     "eventList": [
-        
+        {
+            "id": "780dbdbf-fa0b-4ef9-a99d-61935db8fcc1",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 0,
+            "eventtype": 0,
+            "m_owner": "e7db1a3c-3461-4de3-a68f-b2f2acee9075"
+        }
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,

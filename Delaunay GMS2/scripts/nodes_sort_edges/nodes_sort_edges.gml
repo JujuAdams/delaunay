@@ -3,8 +3,7 @@
 /// @param clockwise
 
 var _node_array = argument0;
-var _edge_array  = argument1;
-var _clockwise   = argument2;
+var _edge_array = argument1;
 
 var _list = ds_list_create();
 
@@ -48,7 +47,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 		ds_list_add( _list, _weight );
 	}
 	
-	ds_list_sort( _list, !_clockwise );
+	ds_list_sort( _list, true );
 	
 	var _list_size = ds_list_size( _list );
 	for( var _e = 0; _e < _list_size; _e++ )

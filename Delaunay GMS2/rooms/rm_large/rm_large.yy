@@ -1,6 +1,6 @@
 
 {
-    "name": "rm_main",
+    "name": "rm_large",
     "id": "09d326bd-2b3b-4ddf-a58a-4ee99a0dbf9a",
     "creationCodeFile": "",
     "inheritCode": false,
@@ -122,7 +122,7 @@
     },
     "mvc": "1.0",
     "views": [
-{"id": "c5d608f6-7aea-435a-8ea4-76f7bd8e1ec2","hborder": 32,"hport": 768,"hspeed": -1,"hview": 768,"inherit": false,"modelName": "GMRView","objId": "00000000-0000-0000-0000-000000000000","mvc": "1.0","vborder": 32,"visible": false,"vspeed": -1,"wport": 1024,"wview": 1024,"xport": 0,"xview": 0,"yport": 0,"yview": 0},
+{"id": "c5d608f6-7aea-435a-8ea4-76f7bd8e1ec2","hborder": 32,"hport": 1080,"hspeed": -1,"hview": 3375,"inherit": false,"modelName": "GMRView","objId": "00000000-0000-0000-0000-000000000000","mvc": "1.0","vborder": 32,"visible": true,"vspeed": -1,"wport": 1920,"wview": 6000,"xport": 0,"xview": 0,"yport": 0,"yview": 0},
 {"id": "e2382729-953d-4b24-819b-af2942bb2fd3","hborder": 32,"hport": 768,"hspeed": -1,"hview": 768,"inherit": false,"modelName": "GMRView","objId": "00000000-0000-0000-0000-000000000000","mvc": "1.0","vborder": 32,"visible": false,"vspeed": -1,"wport": 1024,"wview": 1024,"xport": 0,"xview": 0,"yport": 0,"yview": 0},
 {"id": "fa6d1d19-266e-4c8e-b654-ee8e39a6eb12","hborder": 32,"hport": 768,"hspeed": -1,"hview": 768,"inherit": false,"modelName": "GMRView","objId": "00000000-0000-0000-0000-000000000000","mvc": "1.0","vborder": 32,"visible": false,"vspeed": -1,"wport": 1024,"wview": 1024,"xport": 0,"xview": 0,"yport": 0,"yview": 0},
 {"id": "7f6a7dda-b296-41a6-ab0e-bf47970fbaa2","hborder": 32,"hport": 768,"hspeed": -1,"hview": 768,"inherit": false,"modelName": "GMRView","objId": "00000000-0000-0000-0000-000000000000","mvc": "1.0","vborder": 32,"visible": false,"vspeed": -1,"wport": 1024,"wview": 1024,"xport": 0,"xview": 0,"yport": 0,"yview": 0},

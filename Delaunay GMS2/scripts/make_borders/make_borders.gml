@@ -3,9 +3,9 @@
 /// @param edge_array
 /// @param node_lookup_map
 
-var _path_array       = argument0;
+var _path_array      = argument0;
 var _node_array      = argument1;
-var _edge_array       = argument2;
+var _edge_array      = argument2;
 var _node_lookup_map = argument3;
 
 var _path_count = array_length_1d( _path_array );
@@ -46,6 +46,8 @@ while( !ds_map_empty( _unvisited_map ) )
 		var _path = path_add();
 		var _path_first_node = undefined;
 		var _path_first_edge = undefined;
+		var _path_point_array = array_create( 0 );
+		var _path_point_count = 0;
 	}
 	else
 	{
@@ -69,10 +71,10 @@ while( !ds_map_empty( _unvisited_map ) )
 	for( var _offset_e = _start_e; _offset_e <= _end_e; _offset_e++ )
 	{
 		var _e = _offset_e mod _node_edges_count;
-		show_debug_message( "    E is " + string( _e ) + " of " + string( _node_edges_count-1 ) );
 		
 		//Find our edge in the global list and extract information about it
 		var _edge_id = _node_edges[ _e ];
+		show_debug_message( "    E is " + string( _edge_id ) + " (" + string( _e ) + " of " + string( _node_edges_count-1 ) + ")" );
 		var _x1 = _edge_array[ _edge_id + e_edge.x1 ];
 		var _y1 = _edge_array[ _edge_id + e_edge.y1 ];
 		var _x2 = _edge_array[ _edge_id + e_edge.x2 ];
@@ -157,15 +159,20 @@ while( !ds_map_empty( _unvisited_map ) )
 			if ( _p == _path_first_node ) && ( _e == _path_first_edge )
 			{
 				show_debug_message( "New path " + string( _path ) + ", node count=" + string( path_get_number( _path ) ) );
-				_path_array[@ _path_count + e_border.path   ] = _path;
-				_path_array[@ _path_count + e_border.colour ] = _p_colour;
+				_path_array[@ _path_count + e_border.path        ] = _path;
+				_path_array[@ _path_count + e_border.colour      ] = _p_colour;
+				_path_array[@ _path_count + e_border.point_array ] = _path_point_array;
 				_path_count += e_border.size;
 				_p = undefined;
 				break;
 			}
 			
 			//Add the midnode of the edge to the boundary
-			path_add_point( _path, lerp( _px, _qx, 0.46 ), lerp( _py, _qy, 0.46 ), 100 );
+			var _nx = lerp( _px, _qx, 0.46 );
+			var _ny = lerp( _py, _qy, 0.46 );
+			path_add_point( _path, _nx, _ny, 100 );
+			_path_point_array[ _path_point_count++ ] = _nx;
+			_path_point_array[ _path_point_count++ ] = _ny;
 			
 			//If this is the path's first border node, make a note of it so we don't go round in circles
 			if ( _path_first_node == undefined ) _path_first_node = _p;

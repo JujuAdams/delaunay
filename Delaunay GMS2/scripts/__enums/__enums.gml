@@ -4,6 +4,7 @@ enum e_node {
 	y,
 	edges,
 	colour,
+	vbuff,
 	size
 }
 enum e_triangle {
@@ -28,6 +29,7 @@ enum e_edge {
 enum e_border {
 	path,
 	point_array,
+	triangle_array,
 	colour,
 	size
 }
