@@ -62,5 +62,7 @@ nodes_sort_edges( node_array, edge_array );
 border_array = array_create( 0 );
 make_borders( border_array, node_array, edge_array, node_lookup_map );
 
+smooth_borders( border_array, 3, 50 );
+
 //And prettify the borders a bit
 borders_make_vertex_buffer( border_array );

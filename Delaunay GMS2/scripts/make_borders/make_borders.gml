@@ -43,7 +43,6 @@ while( !ds_map_empty( _unvisited_map ) )
 		var _start_e = 0;
 		
 		//Create a new path and initialise our start node as nowhere, man
-		var _path = path_add();
 		var _path_first_node = undefined;
 		var _path_first_edge = undefined;
 		var _path_point_array = array_create( 0 );
@@ -94,7 +93,6 @@ while( !ds_map_empty( _unvisited_map ) )
 		else
 		{
 			show_error( "Cannot find P on edge. Skipping this boundary", false );
-			path_delete( _path );
 			_p = undefined;
 			break;
 		}
@@ -136,7 +134,6 @@ while( !ds_map_empty( _unvisited_map ) )
 			{
 				//If we can't find the edge for P in Q, abort and try another node
 				show_error( "Cannot find P's edge in Q. Skipping this boundary\n ", false );
-				path_delete( _path );
 				_p = undefined;
 				break;
 			}
@@ -158,8 +155,7 @@ while( !ds_map_empty( _unvisited_map ) )
 			//If we've looped back round to where we started, break
 			if ( _p == _path_first_node ) && ( _e == _path_first_edge )
 			{
-				show_debug_message( "New path " + string( _path ) + ", node count=" + string( path_get_number( _path ) ) );
-				_path_array[@ _path_count + e_border.path           ] = _path;
+				show_debug_message( "New path, node count=" + string( _path_point_count ) );
 				_path_array[@ _path_count + e_border.colour         ] = _p_colour;
 				_path_array[@ _path_count + e_border.point_array    ] = _path_point_array;
 				_path_array[@ _path_count + e_border.triangle_array ] = array_create( 0 );
@@ -172,7 +168,6 @@ while( !ds_map_empty( _unvisited_map ) )
 			//Add the midnode of the edge to the boundary
 			var _nx = lerp( _px, _qx, 0.46 );
 			var _ny = lerp( _py, _qy, 0.46 );
-			path_add_point( _path, _nx, _ny, 100 );
 			_path_point_array[ _path_point_count++ ] = _nx;
 			_path_point_array[ _path_point_count++ ] = _ny;
 			

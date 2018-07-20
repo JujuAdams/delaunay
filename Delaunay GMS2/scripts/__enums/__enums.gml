@@ -27,7 +27,6 @@ enum e_edge {
 	size
 }
 enum e_border {
-	path,
 	point_array,
 	triangle_array,
 	colour,
