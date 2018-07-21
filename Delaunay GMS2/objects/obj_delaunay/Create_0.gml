@@ -27,7 +27,14 @@ if ( room == rm_large )
 vertex_format_begin();
 vertex_format_add_position();
 vertex_format_add_color();
-global.vft_2d_untextured = vertex_format_end();
+global.vft_2d_region = vertex_format_end();
+
+vertex_format_begin();
+vertex_format_add_position();
+vertex_format_add_normal();
+vertex_format_add_color();
+global.vft_2d_boundary = vertex_format_end();
+
 
 
 
@@ -60,9 +67,11 @@ nodes_sort_edges( node_array, edge_array );
 
 //Make borders around each set of nodes
 border_array = array_create( 0 );
-make_borders( border_array, node_array, edge_array, node_lookup_map, 10 );
+make_borders( border_array, node_array, edge_array, node_lookup_map, 5 );
 
-smooth_borders( border_array, 5, 100 );
+//Angular borders might be ok for some people, but over here at Grumpy Pug Industries, we demand loose curves
+smooth_borders( border_array, 5, 50 );
 
 //And prettify the borders a bit
-borders_make_vertex_buffer( border_array );
+borders_make_boundary_vertex_buffer( border_array );
+borders_make_region_vertex_buffer( border_array );

@@ -80,23 +80,41 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 
 for( var _b = 0; _b < _borders_count; _b += e_border.size )
 {
-	var _colour      = border_array[ _b + e_border.colour      ];
-	var _vbuff       = border_array[ _b + e_border.vbuff       ];
-	var _point_array = border_array[ _b + e_border.point_array ];
-	draw_set_colour( _colour );
+	var _colour         = border_array[ _b + e_border.colour         ];
+	var _boundary_vbuff = border_array[ _b + e_border.boundary_vbuff ];
+	var _region_vbuff   = border_array[ _b + e_border.region_vbuff   ];
+	var _point_array    = border_array[ _b + e_border.point_array    ];
 	
-	if ( _vbuff != undefined )
+	if ( _region_vbuff != undefined )
 	{
-		shader_set( shd_force_rgba );
+		shader_set( shd_region );
 		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vRGBA" ),
 		                      colour_get_red(   _colour )/255,
 							  colour_get_green( _colour )/255,
 							  colour_get_blue(  _colour )/255,
-							  0.2 );//lerp( 0.15, 0.2, 0.5+0.5*dsin( _b*40 + current_time/9 ) ) );
-		vertex_submit( _vbuff, pr_trianglelist, -1 );
+							  lerp( 0.2, 0.25, 0.5+0.5*dsin( _b*40 + current_time/9 ) ) );
+		vertex_submit( _region_vbuff, pr_trianglelist, -1 );
 		shader_reset();
 	}
 	
+	if ( _boundary_vbuff != undefined ) && ( !keyboard_check( vk_shift ) )
+	{
+		gpu_set_tex_repeat( true );
+		shader_set( shd_boundary );
+		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vRGBA" ),
+		                      colour_get_red(   _colour )/255,
+							  colour_get_green( _colour )/255,
+							  colour_get_blue(  _colour )/255,
+							  1 );
+		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vThickness" ),
+		                      lerp( 2, 6, 0.5+0.5*dsin( current_time/10 ) ) );
+		vertex_submit( _boundary_vbuff, pr_trianglelist, sprite_get_texture( spr_boundary_texture, 0 ) );
+		shader_reset();
+		gpu_set_tex_repeat( false );
+	}
+	
+	//draw_set_colour( _colour );
+	/*
 	var _path_nodes_count = array_length_1d( _point_array );
 	for( var _p = 0; _p < _path_nodes_count; _p += 2 )
 	{
@@ -105,8 +123,10 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 		var _y1 = _point_array[ _p + 1      ];
 		var _x2 = _point_array[ _p_next     ];
 		var _y2 = _point_array[ _p_next + 1 ];
-		draw_line_width( _x1, _y1, _x2, _y2, 5 );
+		//draw_text( _x1, _y1, _p );
+		//draw_line_width( _x1, _y1, _x2, _y2, 5 );
 	}
+	*/
 }
 
 draw_set_colour( c_white );

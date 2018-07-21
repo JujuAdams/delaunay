@@ -27,7 +27,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 	}
 	
 	var _vbuff = vertex_create_buffer();
-	vertex_begin( _vbuff, global.vft_2d_untextured );
+	vertex_begin( _vbuff, global.vft_2d_region );
 	
 	var _qx = _px;
 	var _qy = _py;

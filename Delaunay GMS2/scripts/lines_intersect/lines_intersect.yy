@@ -1,8 +1,8 @@
 {
-    "id": "a10ebd0c-bbdf-4b00-8e17-874b5b026d97",
+    "id": "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "borders_make_vertex_buffer",
+    "name": "lines_intersect",
     "IsCompatibility": false,
     "IsDnD": false
 }

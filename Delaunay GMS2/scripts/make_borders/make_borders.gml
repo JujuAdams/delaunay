@@ -161,7 +161,8 @@ while( !ds_map_empty( _unvisited_map ) )
 				_path_array[@ _path_count + e_border.colour         ] = _p_colour;
 				_path_array[@ _path_count + e_border.point_array    ] = _path_point_array;
 				_path_array[@ _path_count + e_border.triangle_array ] = array_create( 0 );
-				_path_array[@ _path_count + e_border.vbuff          ] = undefined;
+				_path_array[@ _path_count + e_border.boundary_vbuff ] = undefined;
+				_path_array[@ _path_count + e_border.region_vbuff   ] = undefined;
 				_path_count += e_border.size;
 				_p = undefined;
 				break;

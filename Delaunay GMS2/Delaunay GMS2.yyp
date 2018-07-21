@@ -63,6 +63,14 @@
             }
         },
         {
+            "Key": "1f32c8d5-6adc-40cb-acb6-9e9b8ad1b899",
+            "Value": {
+                "id": "ee51b91c-cc48-441f-bbb8-0af48db91f89",
+                "resourcePath": "rooms\\rm_single\\rm_single.yy",
+                "resourceType": "GMRoom"
+            }
+        },
+        {
             "Key": "24541e51-0a40-4ba8-8fed-255c8e197663",
             "Value": {
                 "id": "92a8dbe1-9815-41a1-9f4a-883c8f0eeb9c",
@@ -207,6 +215,14 @@
             }
         },
         {
+            "Key": "7b0915df-93f4-4691-9085-cd3b8b1b58a0",
+            "Value": {
+                "id": "0b27ee97-f76a-4fb2-ac67-840e467db34d",
+                "resourcePath": "scripts\\borders_make_boundary_vertex_buffer\\borders_make_boundary_vertex_buffer.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "7e093a2a-e51c-4a1e-9a53-f9080d38730b",
             "Value": {
                 "id": "27e2fd40-f932-41d2-af4d-0f798c249f19",
@@ -290,7 +306,7 @@
             "Key": "a10ebd0c-bbdf-4b00-8e17-874b5b026d97",
             "Value": {
                 "id": "7186207f-cee2-441c-9226-483dbf94ad48",
-                "resourcePath": "scripts\\borders_make_vertex_buffer\\borders_make_vertex_buffer.yy",
+                "resourcePath": "scripts\\borders_make_region_vertex_buffer\\borders_make_region_vertex_buffer.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -335,6 +351,14 @@
             }
         },
         {
+            "Key": "ab86a58c-b31f-450e-95b0-48326432dc70",
+            "Value": {
+                "id": "e4eb929a-56aa-4f91-a8e5-1ee703b01ced",
+                "resourcePath": "shaders\\shd_boundary\\shd_boundary.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "af5952a5-feca-4c7e-87ad-0480a4dd3912",
             "Value": {
                 "id": "906db7a1-ed90-48ce-8c5d-055eaf935558",
@@ -343,11 +367,27 @@
             }
         },
         {
+            "Key": "b63da926-3a00-4160-b675-3d1070907054",
+            "Value": {
+                "id": "f82f7b71-b74f-4ea3-9df9-ba02de45a6e9",
+                "resourcePath": "sprites\\spr_boundary_texture\\spr_boundary_texture.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "ba42dd3e-93a0-4d32-af1c-846038b9783b",
             "Value": {
                 "id": "b039400e-62a9-4429-8299-d91baa946ef7",
                 "resourcePath": "rooms\\rm_small\\rm_small.yy",
                 "resourceType": "GMRoom"
+            }
+        },
+        {
+            "Key": "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a",
+            "Value": {
+                "id": "b560a6f2-7844-4473-8a95-56f8d7b4857f",
+                "resourcePath": "scripts\\lines_intersect\\lines_intersect.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -386,7 +426,7 @@
             "Key": "ddfac32a-53c1-4dce-b860-246c0849f633",
             "Value": {
                 "id": "c586d70c-b981-4ec8-afe3-2ee641877db6",
-                "resourcePath": "shaders\\shd_force_rgba\\shd_force_rgba.yy",
+                "resourcePath": "shaders\\shd_region\\shd_region.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -479,8 +519,10 @@
         "9d943860-356a-4143-9d27-3afc6ad7d79e",
         "fecf9024-1f82-4ba6-b864-239e5dea1ddf",
         "45dd7ee0-1ba6-4b26-84e0-18b3d8495d08",
+        "7b0915df-93f4-4691-9085-cd3b8b1b58a0",
         "a10ebd0c-bbdf-4b00-8e17-874b5b026d97",
-        "f3fe9b66-bb71-475f-a3e7-0d7a602c4cee"
+        "f3fe9b66-bb71-475f-a3e7-0d7a602c4cee",
+        "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a"
     ],
     "tutorial": ""
 }

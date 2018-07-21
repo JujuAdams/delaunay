@@ -117,7 +117,7 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 	if ( _triangle_count > 0 )
 	{
 		var _vbuff = vertex_create_buffer();
-		vertex_begin( _vbuff, global.vft_2d_untextured );
+		vertex_begin( _vbuff, global.vft_2d_region );
 		for( var _t = 0; _t < _triangle_count; _t += e_triangle.size )
 		{
 		    var _x1 = _triangle_array[ e_triangle.x1 + _t ];
@@ -133,6 +133,6 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 		}
 		vertex_end( _vbuff );
 		vertex_freeze( _vbuff );
-		_border_array[@ _b + e_border.vbuff ] = _vbuff;
+		_border_array[@ _b + e_border.region_vbuff ] = _vbuff;
 	}
 }
