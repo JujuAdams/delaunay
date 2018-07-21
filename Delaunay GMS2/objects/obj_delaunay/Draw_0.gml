@@ -84,6 +84,7 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 	var _boundary_vbuff = border_array[ _b + e_border.boundary_vbuff ];
 	var _region_vbuff   = border_array[ _b + e_border.region_vbuff   ];
 	var _point_array    = border_array[ _b + e_border.point_array    ];
+	var _length         = border_array[ _b + e_border.length         ];
 	
 	if ( _region_vbuff != undefined )
 	{
@@ -107,7 +108,11 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 							  colour_get_blue(  _colour )/255,
 							  1 );
 		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vThickness" ),
-		                      lerp( 2, 6, 0.5+0.5*dsin( current_time/10 ) ) );
+		                      20 );
+		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fRepeats" ),
+		                      floor( _length / 64 ) );
+		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fOffset" ),
+		                      current_time/200 );
 		vertex_submit( _boundary_vbuff, pr_trianglelist, sprite_get_texture( spr_boundary_texture, 0 ) );
 		shader_reset();
 		gpu_set_tex_repeat( false );

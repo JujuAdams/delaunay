@@ -70,7 +70,9 @@ border_array = array_create( 0 );
 make_borders( border_array, node_array, edge_array, node_lookup_map, 5 );
 
 //Angular borders might be ok for some people, but over here at Grumpy Pug Industries, we demand loose curves
-smooth_borders( border_array, 5, 50 );
+//smooth_borders( border_array, 5, 50 );
+
+borders_find_length( border_array );
 
 //And prettify the borders a bit
 borders_make_boundary_vertex_buffer( border_array );

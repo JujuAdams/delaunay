@@ -30,6 +30,7 @@ enum e_border {
 	point_array,
 	triangle_array,
 	colour,
+	length,
 	boundary_vbuff,
 	region_vbuff,
 	size
