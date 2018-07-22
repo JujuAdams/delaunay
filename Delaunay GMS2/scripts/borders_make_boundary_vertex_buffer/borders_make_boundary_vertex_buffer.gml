@@ -84,13 +84,13 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 			//Only add a quad if we've cached data from the last iteration
 			//Effectively this means that the first iteration doesn't draw anything, but subsequent iterations do
 			show_debug_message( string( _last_u ) + " -> " + string( _this_u ) );
-			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_o_nx, _last_o_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _last_u*255,   0, 0 ), 1 );
-			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _o_nx,      _o_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _this_u*255,   0, 0 ), 1 );
-			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _i_nx,      _i_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _this_u*255, 255, 0 ), 1 );
+			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_o_nx, _last_o_ny, 0 ); vertex_texcoord( _vbuff, _last_u, 0 );
+			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _o_nx,      _o_ny, 0 ); vertex_texcoord( _vbuff, _this_u, 0 );
+			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _i_nx,      _i_ny, 0 ); vertex_texcoord( _vbuff, _this_u, 1 );
 			
-			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_o_nx, _last_o_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _last_u*255,   0, 0 ), 1 );
-			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_i_nx, _last_i_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _last_u*255, 255, 0 ), 1 );
-			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _i_nx,      _i_ny, 0 ); vertex_colour( _vbuff, make_colour_rgb( _this_u*255, 255, 0 ), 1 );
+			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_o_nx, _last_o_ny, 0 ); vertex_texcoord( _vbuff, _last_u, 0 );
+			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_i_nx, _last_i_ny, 0 ); vertex_texcoord( _vbuff, _last_u, 1 );
+			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _i_nx,      _i_ny, 0 ); vertex_texcoord( _vbuff, _this_u, 1 );
 		}
 		
 		//Cache the two normal vectors for use in the next iteration

@@ -346,7 +346,7 @@
             "Key": "ab86a58c-b31f-450e-95b0-48326432dc70",
             "Value": {
                 "id": "e4eb929a-56aa-4f91-a8e5-1ee703b01ced",
-                "resourcePath": "shaders\\shd_boundary\\shd_boundary.yy",
+                "resourcePath": "shaders\\shd_border_boundary\\shd_border_boundary.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -434,7 +434,7 @@
             "Key": "ddfac32a-53c1-4dce-b860-246c0849f633",
             "Value": {
                 "id": "c586d70c-b981-4ec8-afe3-2ee641877db6",
-                "resourcePath": "shaders\\shd_region\\shd_region.yy",
+                "resourcePath": "shaders\\shd_border_region\\shd_border_region.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -539,8 +539,8 @@
         "a10ebd0c-bbdf-4b00-8e17-874b5b026d97",
         "f3fe9b66-bb71-475f-a3e7-0d7a602c4cee",
         "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a",
-        "62fab043-ae2e-4e47-b7d6-9e58d974e34d",
-        "acceaa03-5f32-4bda-b7d6-be3efad7f064"
+        "acceaa03-5f32-4bda-b7d6-be3efad7f064",
+        "62fab043-ae2e-4e47-b7d6-9e58d974e34d"
     ],
     "tutorial": ""
 }

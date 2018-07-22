@@ -32,7 +32,7 @@ global.vft_2d_region = vertex_format_end();
 vertex_format_begin();
 vertex_format_add_position();
 vertex_format_add_normal();
-vertex_format_add_color();
+vertex_format_add_texcoord();
 global.vft_2d_boundary = vertex_format_end();
 
 //Run over all nodes in the room and drop their coordinates into an array
@@ -64,7 +64,7 @@ border_array = array_create( 0 );
 borders_make( border_array, node_array, edge_array, node_lookup_map, 5 );
 
 //Angular borders might be ok for some people, but over here at Grumpy Pug Industries, we demand loose curves
-borders_smooth( border_array, 5, 0.1 );
+borders_smooth( border_array, 5, 0.8 );
 
 //Now generate the vertex buffers for the boundary and the region itself
 borders_make_boundary_vertex_buffer( border_array );

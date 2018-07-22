@@ -11,7 +11,7 @@ var _region_vbuff = border_array[ _border + e_border.region_vbuff ];
 
 if ( _region_vbuff == undefined ) || ( _alpha <= 0 ) exit;
 
-shader_set( shd_region );
+shader_set( shd_border_region );
 shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vRGBA" ),
 		                colour_get_red(   _colour )/255,
 						colour_get_green( _colour )/255,
