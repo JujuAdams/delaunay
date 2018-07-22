@@ -1,8 +1,8 @@
 {
-    "id": "ef8703a8-a1ba-4c33-87b0-44f10b97f461",
+    "id": "db0ccd3a-dcb9-478f-baaa-3302f5d7ed5e",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "smooth_borders",
+    "name": "borders_make",
     "IsCompatibility": false,
     "IsDnD": false
 }

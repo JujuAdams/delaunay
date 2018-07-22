@@ -6,5 +6,5 @@ uniform float u_fOffset;
 
 void main()
 {
-    gl_FragColor = u_vRGBA * texture2D( gm_BaseTexture, vec2( u_fRepeats*v_vColour.r - u_fOffset, v_vColour.g ) );
+    gl_FragColor = u_vRGBA;// * texture2D( gm_BaseTexture, vec2( u_fRepeats*v_vColour.r - u_fOffset, v_vColour.g ) );
 }

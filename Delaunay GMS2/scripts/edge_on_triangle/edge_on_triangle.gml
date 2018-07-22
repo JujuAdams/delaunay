@@ -1,14 +1,13 @@
-/// @description edge_on_triangle( x1, y1, x2, y2, px1, py1, px2, py2, px3, py3 )
-/// @param  x1
-/// @param  y1
-/// @param  x2
-/// @param  y2
-/// @param  px1
-/// @param  py1
-/// @param  px2
-/// @param  py2
-/// @param  px3
-/// @param  py3 
+/// @param x1
+/// @param y1
+/// @param x2
+/// @param y2
+/// @param px1
+/// @param py1
+/// @param px2
+/// @param py2
+/// @param px3
+/// @param py3 
 
 var _x1 = argument0;
 var _y1 = argument1;

@@ -1,10 +1,10 @@
 /// @param  nodes
-/// @param  triangles_array_out
+/// @param  triangles_array
 /// @param  left
 /// @param  top
 /// @param  right
 /// @param  bottom
-/// @param  remove border 
+/// @param  remove_border 
 
 var _nodes        = argument0;
 var _out_triangles = argument1;

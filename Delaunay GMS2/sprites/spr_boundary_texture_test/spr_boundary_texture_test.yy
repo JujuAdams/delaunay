@@ -2,7 +2,7 @@
     "id": "b63da926-3a00-4160-b675-3d1070907054",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "spr_boundary_test_texture",
+    "name": "spr_boundary_texture_test",
     "For3D": true,
     "HTile": false,
     "VTile": false,

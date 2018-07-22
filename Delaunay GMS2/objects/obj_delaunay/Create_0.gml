@@ -1,3 +1,4 @@
+//If we're in the large example room, load in some nodes from a CSV file
 if ( room == rm_large )
 {
 	var _width  = room_width*.5-300;
@@ -9,8 +10,7 @@ if ( room == rm_large )
 	{
 	    instance_create_depth( _cx + lengthdir_x( _width, _angle ), _cy + lengthdir_y( _height, _angle ), 0, obj_perimeter_node ); 
 	}
-
-
+	
 	var _grid = load_csv( "debug.txt" );
 	var _height = ds_grid_height( _grid );
 	for( var _y = 0; _y < _height; _y++ )
@@ -18,12 +18,12 @@ if ( room == rm_large )
 		var _star_x = real( _grid[# 0, _y ] );
 		var _star_y = real( _grid[# 1, _y ] );
 		var _star_f = real( _grid[# 2, _y ] );
-		show_debug_message( "x=" + string( _star_x ) + ",y=" + string( _star_y ) + ",faction=" + string( _star_f ) );
 		var _inst = instance_create_depth( _star_x, _star_y, 0, obj_node );
 		_inst.image_blend = make_colour_hsv( _star_f*255/8, 255, 255 );
 	}
 }
 
+//Create a couple of vertex formats that'll get used later
 vertex_format_begin();
 vertex_format_add_position();
 vertex_format_add_color();
@@ -35,15 +35,12 @@ vertex_format_add_normal();
 vertex_format_add_color();
 global.vft_2d_boundary = vertex_format_end();
 
-
-
-
 //Run over all nodes in the room and drop their coordinates into an array
 node_array = array_create( 0 );
 node_lookup_map = ds_map_create();
 nodes_make_from_object( node_array, node_lookup_map, obj_node );
 
-//Run the algorithm!
+//Run the Delaunay triangulation algorithm
 triangle_array = array_create( 0 );
 delaunay_bowyer_watson( node_array, triangle_array,   0, 0, room_width, room_height,   true );
 
@@ -60,20 +57,15 @@ edges_associate_nodes( edge_array, node_to_edge_map );
 nodes_assign_edges( node_array, node_to_edge_map );
 
 //Order each node's edges in a counterclockwise order
-//(The direction doesn't matter, only that they're all ordered the same way)
 nodes_sort_edges( node_array, edge_array );
-
-//nodes_build_vertex_buffer( node_array, edge_array, node_lookup_map );
 
 //Make borders around each set of nodes
 border_array = array_create( 0 );
-make_borders( border_array, node_array, edge_array, node_lookup_map, 5 );
+borders_make( border_array, node_array, edge_array, node_lookup_map, 5 );
 
 //Angular borders might be ok for some people, but over here at Grumpy Pug Industries, we demand loose curves
-//smooth_borders( border_array, 5, 50 );
+borders_smooth( border_array, 5, 0.1 );
 
-borders_find_length( border_array );
-
-//And prettify the borders a bit
+//Now generate the vertex buffers for the boundary and the region itself
 borders_make_boundary_vertex_buffer( border_array );
 borders_make_region_vertex_buffer( border_array );

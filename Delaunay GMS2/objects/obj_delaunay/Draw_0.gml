@@ -108,11 +108,13 @@ for( var _b = 0; _b < _borders_count; _b += e_border.size )
 							  colour_get_blue(  _colour )/255,
 							  1 );
 		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vThickness" ),
-		                      20 );
+		                      30 );
 		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fRepeats" ),
-		                      floor( _length / 64 ) );
+		                      1 );
+		                      //floor( _length / 64 ) );
 		shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fOffset" ),
-		                      current_time/200 );
+		                      1 );
+		                      //current_time/1000 );
 		vertex_submit( _boundary_vbuff, pr_trianglelist, sprite_get_texture( spr_boundary_texture, 0 ) );
 		shader_reset();
 		gpu_set_tex_repeat( false );
