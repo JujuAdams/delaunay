@@ -11,11 +11,14 @@ var _region_vbuff = border_array[ _border + e_border.region_vbuff ];
 
 if ( _region_vbuff == undefined ) || ( _alpha <= 0 ) exit;
 
+var _old_tex_repeat = gpu_get_tex_repeat();
+gpu_set_tex_repeat( true );
 shader_set( shd_border_region );
 shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vRGBA" ),
 		                colour_get_red(   _colour )/255,
 						colour_get_green( _colour )/255,
 						colour_get_blue(  _colour )/255,
 						_alpha );
-vertex_submit( _region_vbuff, pr_trianglelist, -1 );
+vertex_submit( _region_vbuff, pr_trianglelist, sprite_get_texture( spr_region_texture, 0 ) );
 shader_reset();
+gpu_set_tex_repeat( _old_tex_repeat );
