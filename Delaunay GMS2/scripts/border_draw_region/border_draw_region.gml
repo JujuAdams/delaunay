@@ -1,10 +1,14 @@
 /// @param border_index
 /// @param colour
 /// @param alpha
+/// @param sprite
+/// @param image
 
 var _border = argument0;
 var _colour = argument1;
 var _alpha  = argument2;
+var _sprite = argument3;
+var _image  = argument4;
 
 if ( _colour == undefined ) || ( _colour < 0 ) _colour = border_array[ _border + e_border.colour ];
 var _region_vbuff = border_array[ _border + e_border.region_vbuff ];
@@ -19,6 +23,6 @@ shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vRGBA" ),
 						colour_get_green( _colour )/255,
 						colour_get_blue(  _colour )/255,
 						_alpha );
-vertex_submit( _region_vbuff, pr_trianglelist, sprite_get_texture( spr_region_texture, 0 ) );
+vertex_submit( _region_vbuff, pr_trianglelist, sprite_get_texture( _sprite, _image ) );
 shader_reset();
 gpu_set_tex_repeat( _old_tex_repeat );

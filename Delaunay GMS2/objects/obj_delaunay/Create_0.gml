@@ -61,7 +61,7 @@ nodes_sort_edges( node_array, edge_array );
 
 //Make borders around each set of nodes
 border_array = array_create( 0 );
-borders_make( border_array, node_array, edge_array, node_lookup_map, 5 );
+borders_make( border_array, node_array, edge_array, node_lookup_map, 10 );
 
 //Angular borders might be ok for some people, but over here at Grumpy Pug Industries, we demand loose curves
 borders_smooth( border_array, 5, 0.8 );
