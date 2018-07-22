@@ -4,7 +4,6 @@ enum e_node {
 	y,
 	edges,
 	colour,
-	vbuff,
 	size
 }
 enum e_triangle {

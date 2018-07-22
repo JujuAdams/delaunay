@@ -19,7 +19,6 @@ for( var _i = 0; _i < _size; _i++ ) {
     _node_array[@ e_node.y      + _nodes_count ] = _inst.y;
 	_node_array[@ e_node.edges  + _nodes_count ] = array_create( 0 );
 	_node_array[@ e_node.colour + _nodes_count ] = _inst.image_blend;
-	_node_array[@ e_node.vbuff  + _nodes_count ] = undefined;
     
 	_node_lookup_map[? string( _inst.x ) + "," + string( _inst.y ) ] = _nodes_count;
 	

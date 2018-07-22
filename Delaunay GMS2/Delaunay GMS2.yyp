@@ -183,6 +183,14 @@
             }
         },
         {
+            "Key": "62fab043-ae2e-4e47-b7d6-9e58d974e34d",
+            "Value": {
+                "id": "96d1e0c6-5222-4f04-aed1-a04bd1c37543",
+                "resourcePath": "scripts\\border_draw_boundary\\border_draw_boundary.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "67b6477e-2258-4908-9cd2-bc8f14309a4f",
             "Value": {
                 "id": "9fa68426-3069-4820-a783-07c6cab0b101",
@@ -340,6 +348,14 @@
                 "id": "e4eb929a-56aa-4f91-a8e5-1ee703b01ced",
                 "resourcePath": "shaders\\shd_boundary\\shd_boundary.yy",
                 "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "acceaa03-5f32-4bda-b7d6-be3efad7f064",
+            "Value": {
+                "id": "c5322058-7219-463f-ae62-a06fb0d788b0",
+                "resourcePath": "scripts\\border_draw_region\\border_draw_region.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -522,7 +538,9 @@
         "7b0915df-93f4-4691-9085-cd3b8b1b58a0",
         "a10ebd0c-bbdf-4b00-8e17-874b5b026d97",
         "f3fe9b66-bb71-475f-a3e7-0d7a602c4cee",
-        "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a"
+        "c0ae7d3b-5aa5-42e5-bf5a-e458bda0289a",
+        "62fab043-ae2e-4e47-b7d6-9e58d974e34d",
+        "acceaa03-5f32-4bda-b7d6-be3efad7f064"
     ],
     "tutorial": ""
 }
