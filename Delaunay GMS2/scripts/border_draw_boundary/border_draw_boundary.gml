@@ -33,7 +33,7 @@ shader_set_uniform_f( shader_get_uniform( shader_current(), "u_vThickness" ),
 shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fRepeats" ),
 		                floor( _length / sprite_get_width( _sprite ) ) );
 shader_set_uniform_f( shader_get_uniform( shader_current(), "u_fOffset" ),
-		                _offset );
+		                _offset mod 1 );
 vertex_submit( _boundary_vbuff, pr_trianglelist, sprite_get_texture( _sprite, _image ) );
 shader_reset();
 gpu_set_tex_repeat( _old_tex_repeat );

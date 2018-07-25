@@ -91,7 +91,7 @@ for( var _p = 0; _p < _nodes_count; _p += e_node.size )
 for( var _b = 0; _b < _borders_count; _b += e_border.size )
 {
 	var _border_alpha = lerp( 0.2, 0.25, 0.5+0.5*dsin( _b*40 + current_time/9 ) );
-	border_draw_region( _b, undefined, _border_alpha, spr_region_texture, 0 );
+	border_draw_region( _b, undefined, _border_alpha, spr_region_texture, 0, current_time/80, current_time/100 );
 	border_draw_boundary( _b, undefined, 1, 10, spr_boundary_texture, 0, current_time/1000 );
 	
 	/*

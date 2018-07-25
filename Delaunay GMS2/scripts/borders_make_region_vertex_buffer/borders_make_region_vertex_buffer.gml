@@ -101,8 +101,8 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 				}
 			
 				if ( _intersection ) {
-					show_debug_message( "        Refused due to ray intersection (" + string( _m ) + "->" + string( _n ) + ")" );
-					if ( _debug ) break;
+					if ( _debug ) show_debug_message( "        Refused due to ray intersection (" + string( _m ) + "->" + string( _n ) + ")" );
+					break;
 				}
 				else
 				{

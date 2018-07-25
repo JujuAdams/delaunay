@@ -37,7 +37,7 @@ while( !ds_map_empty( _unvisited_map ) )
 		var _inst = _node_array[ _p + e_node.inst ];
 		if ( _inst.object_index == obj_perimeter_node )
 		{
-			show_debug_message( "P is perimeter, ignoring" );
+			if ( _debug ) show_debug_message( "P is perimeter, ignoring" );
 			_p = undefined;
 			continue;
 		}
@@ -190,3 +190,5 @@ while( !ds_map_empty( _unvisited_map ) )
 		_p = undefined;
 	}
 }
+
+ds_map_destroy( _unvisited_map );

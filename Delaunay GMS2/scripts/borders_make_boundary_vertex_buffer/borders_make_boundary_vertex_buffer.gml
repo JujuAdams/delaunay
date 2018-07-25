@@ -1,6 +1,7 @@
 /// @param border_array
 
 var _border_array = argument0;
+var _debug = false;
 
 //We need to find the border length before we can figure out the texture U-coordinate
 borders_find_length( border_array );
@@ -83,7 +84,7 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 		{
 			//Only add a quad if we've cached data from the last iteration
 			//Effectively this means that the first iteration doesn't draw anything, but subsequent iterations do
-			show_debug_message( string( _last_u ) + " -> " + string( _this_u ) );
+			if ( _debug ) show_debug_message( string( _last_u ) + " -> " + string( _this_u ) );
 			vertex_position( _vbuff, _x1, _y1 ); vertex_normal( _vbuff, _last_o_nx, _last_o_ny, 0 ); vertex_texcoord( _vbuff, _last_u, 0 );
 			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _o_nx,      _o_ny, 0 ); vertex_texcoord( _vbuff, _this_u, 0 );
 			vertex_position( _vbuff, _x2, _y2 ); vertex_normal( _vbuff,      _i_nx,      _i_ny, 0 ); vertex_texcoord( _vbuff, _this_u, 1 );
@@ -97,7 +98,7 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 		_last_o_nx = _o_nx; _last_o_ny = _o_ny;
 		_last_i_nx = _i_nx; _last_i_ny = _i_ny;
 		
-		show_debug_message( string( point_distance( _x1, _y1, _x2, _y2 ) ) + " / " + string( _total_length ) + " == " + string( point_distance( _x1, _y1, _x2, _y2 )/_total_length ) );
+		if ( _debug ) show_debug_message( string( point_distance( _x1, _y1, _x2, _y2 ) ) + " / " + string( _total_length ) + " == " + string( point_distance( _x1, _y1, _x2, _y2 )/_total_length ) );
 		//Cache the U-coordinate of this iteration, and calculate the U-coordinate for the next iteration
 		_last_u = _this_u;
 		_this_u += point_distance( _x1, _y1, _x2, _y2 )/_total_length;
