@@ -1,6 +1,7 @@
 //If we're in the large example room, load in some nodes from a CSV file
 if ( room == rm_large )
 {
+    /*
 	var _width  = room_width*.5-300;
 	var _height = room_height*.5-300;
 	var _cx     = room_width*.5;
@@ -10,16 +11,20 @@ if ( room == rm_large )
 	{
 	    instance_create_depth( _cx + lengthdir_x( _width, _angle ), _cy + lengthdir_y( _height, _angle ), 0, obj_perimeter_node ); 
 	}
-	
-	var _grid = load_csv( "debug.txt" );
+	*/
+	var _grid = load_csv( "debug(1).txt" );
 	var _height = ds_grid_height( _grid );
 	for( var _y = 0; _y < _height; _y++ )
 	{
-		var _star_x = real( _grid[# 0, _y ] );
-		var _star_y = real( _grid[# 1, _y ] );
-		var _star_f = real( _grid[# 2, _y ] );
-		var _inst = instance_create_depth( _star_x, _star_y, 0, obj_node );
-		_inst.image_blend = make_colour_hsv( _star_f*255/8, 255, 255 );
+		var _star_x = real( _grid[# 1, _y ] );
+		var _star_y = real( _grid[# 2, _y ] );
+		var _star_f = real( _grid[# 3, _y ] );
+        if ( _grid[# 0, _y ] == "star" ) {
+    		var _inst = instance_create_depth( _star_x, _star_y, 0, obj_node );
+    		_inst.image_blend = make_colour_hsv( _star_f*255/8, 255, 255 );
+        } else {
+            instance_create_depth( _star_x, _star_y, 0, obj_perimeter_node );
+        }
 	}
 }
 

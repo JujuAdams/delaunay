@@ -159,14 +159,6 @@
             }
         },
         {
-            "Key": "5944dbc2-fae7-4a5b-b108-f9662936b024",
-            "Value": {
-                "id": "ad973b52-f818-452a-ad23-059755acc4bf",
-                "resourcePath": "datafiles_yy\\debug.txt.yy",
-                "resourceType": "GMIncludedFile"
-            }
-        },
-        {
             "Key": "59f2bdf9-1c89-41ab-862f-7a94cdd6e626",
             "Value": {
                 "id": "512420af-165d-401f-8dff-696e0a97349c",
@@ -516,6 +508,14 @@
                 "id": "d49f3294-a418-42cf-a40d-06fee9a2ab61",
                 "resourcePath": "scripts\\borders_find_length\\borders_find_length.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "f82f88cd-ad5b-4742-b100-857ccded18bf",
+            "Value": {
+                "id": "e73dacfc-bd5d-42c5-93fc-ed4b47e657eb",
+                "resourcePath": "datafiles_yy\\debug(1).txt.yy",
+                "resourceType": "GMIncludedFile"
             }
         },
         {

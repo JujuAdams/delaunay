@@ -27,8 +27,18 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 	var _i = -1;
 	
 	//Keep going until we've only got two points left (e.g. the final triangle has been defined)
-	while( ds_list_size( _list ) > 2 )
+    var _iterations = 0;
+	while ( ds_list_size( _list ) > 2 )
 	{
+        _iterations++;
+        if ( _iterations > 1000 )
+        {
+            _triangle_array = array_create( 0 );
+            _triangle_count = 0;
+            show_debug_message( "Breaking out from border " + string( _b ) + " as it is taking too long to process (inverse boundary region?)" );
+            break;
+        }
+        
 		var _list_size = ds_list_size( _list );
 		_i++;
 		
@@ -55,7 +65,7 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 			//If D is greater than 0, D is inside the triangle making the angle PQR a reflex angle (and therefore the path is concave at that point and cannot be earclipped)
 			var _d = (_qx - _px)*(_ry - _py) - (_qy - _py)*(_rx - _px );
 			if ( _debug ) show_debug_message( "    " + string( _p ) + "->" + string( _q ) + "->" + string( _r ) + " = " + string( _d ) );
-			if ( _d <= 0 )
+			if ( _d < 0 )
 			{
 				
 				//We now check if there are any points inside the triangle PQR
@@ -122,6 +132,7 @@ for( var _b = 0; _b < _border_count; _b += e_border.size )
 			}
 			else
 			{
+                if ( _debug ) show_debug_message( "        Refused due to reflex angle" );
 				break;
 			}
 		}
