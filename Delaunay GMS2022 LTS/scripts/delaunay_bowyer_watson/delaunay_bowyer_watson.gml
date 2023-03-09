@@ -172,7 +172,7 @@ function delaunay_bowyer_watson(argument0, argument1, argument2, argument3, argu
     
 	    //Delete bad triangles
 	    for( var _b = _bad_triangles_count - 1; _b >= 0; _b-- ) {
-	        array_delete( _triangles, _bad_triangles[ _b ], e_triangle.size, _triangles_count );
+	        array_delete_custom( _triangles, _bad_triangles[ _b ], e_triangle.size, _triangles_count );
 	        _triangles_count -= e_triangle.size;
 	    }
     
@@ -222,7 +222,7 @@ function delaunay_bowyer_watson(argument0, argument1, argument2, argument3, argu
 	        or ( _x2 <= _min_x ) or ( _y2 <= _min_y ) or ( _x2 >= _max_x ) or ( _y2 >= _max_y )
 	        or ( _x3 <= _min_x ) or ( _y3 <= _min_y ) or ( _x3 >= _max_x ) or ( _y3 >= _max_y ) {
             
-	            array_delete( _triangles, _t, e_triangle.size, _triangles_count );
+	            array_delete_custom( _triangles, _t, e_triangle.size, _triangles_count );
 	            _triangles_count -= e_triangle.size;
             
 	        }

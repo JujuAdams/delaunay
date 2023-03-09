@@ -3,7 +3,7 @@
 /// @param  index
 /// @param  [number to delete]
 /// @param  [array length] 
-function array_delete() {
+function array_delete_custom() {
 
 	var _arr   = argument[0];
 	var _index = argument[1];

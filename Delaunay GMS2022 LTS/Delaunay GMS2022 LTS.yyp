@@ -15,7 +15,7 @@
     {"id":{"name":"edge_on_triangle","path":"scripts/edge_on_triangle/edge_on_triangle.yy",},"order":3,},
     {"id":{"name":"triangle_circumcircle_x","path":"scripts/triangle_circumcircle_x/triangle_circumcircle_x.yy",},"order":4,},
     {"id":{"name":"triangle_circumcircle_y","path":"scripts/triangle_circumcircle_y/triangle_circumcircle_y.yy",},"order":5,},
-    {"id":{"name":"array_delete","path":"scripts/array_delete/array_delete.yy",},"order":6,},
+    {"id":{"name":"array_delete_custom","path":"scripts/array_delete_custom/array_delete_custom.yy",},"order":6,},
     {"id":{"name":"triangulation_find_unique_edges","path":"scripts/triangulation_find_unique_edges/triangulation_find_unique_edges.yy",},"order":7,},
     {"id":{"name":"edges_associate_nodes","path":"scripts/edges_associate_nodes/edges_associate_nodes.yy",},"order":8,},
     {"id":{"name":"nodes_assign_edges","path":"scripts/nodes_assign_edges/nodes_assign_edges.yy",},"order":9,},

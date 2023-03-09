@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "array_delete",
+  "name": "array_delete_custom",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
